@@ -6,6 +6,7 @@ import Register from '../components/Register';
 import Login from '../components/Login';
 import EnterAsATestUser from '../components/EnterAsATestUser'
 export const SignUpOrLogin = () => {
+  
   return (
   <div className='background-log-in-register flex flex-col justify-center items-center'>
       <div className=' flex flex-col justify-start items-center bg-white container-log-in-register'>

@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/sign_up_or_login.jsx", "components/EnterAsATestUser.jsx", "components/Header.jsx", "components/Sidebar.jsx", "components/Register.jsx", "components/Layout.jsx", "components/Login.jsx", "pages/_app.jsx"],
   "exclude": ["node_modules"]
 }

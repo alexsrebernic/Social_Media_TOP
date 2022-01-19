@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
+import Dropdown from './Dropdown'
 const Header = (  ) => {
   return (
       <header className='flex w-full justify-between h-20  px-10 sticky'>
@@ -18,11 +19,19 @@ const Header = (  ) => {
         <div className='flex items-center w-2/5 px-3'>
             <div className='flex items-center px-3 mx-2'>
                 <Icon icon="carbon:user-avatar" width="45px" className='cursor-pointer' color="#bdbcbf" />
-                <span className='px-3 items-center flex cursor-pointer'>Alex Srebernic <Icon icon="bx:bxs-down-arrow" className='ml-2'  width="10" /></span>
+                <Dropdown name="Alex Srebernic" items={["Profile","Configuration","Sign Out"]}/>
+
             </div>
             <div className=''>
+                <Link href="/">
                 <span className='px-3 mx-1 cursor-pointer'>Create</span>
+
+                </Link>
+                <Link href="/">
                 <span className='px-3 mr-4 cursor-pointer'>Home</span>
+
+                </Link>
+
             </div>
             <div className='flex ml-5 interactions-header'>
                 <Icon icon="fa-brands:facebook-messenger" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />
