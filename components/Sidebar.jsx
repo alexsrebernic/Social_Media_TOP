@@ -24,13 +24,13 @@ const Sidebar = () => {
                     <span className='ml-2'> Trending posts</span>
                 </div>
               </Link>
-              <Link href="/">
+              <Link href="/profile">
                 <div className='p-4 flex items-center cursor-pointer   'tabIndex={1}>
                     <Icon icon="vs:profile" width="30px" color="#e5e5e7" />
                     <span className='ml-2'> Profile</span>
                 </div>
               </Link>
-              <Link href="/">
+              <Link href="/settings">
                 <div className='p-4 flex items-center cursor-pointer   'tabIndex={1}>
                     <Icon icon="clarity:settings-solid" width="30px" color="#e5e5e7" />
                     <span className='ml-2'>Settings</span>

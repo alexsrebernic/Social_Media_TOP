@@ -5,6 +5,12 @@ import Dropdown from './Dropdown';
 import DropdownNMF from './DropdownNMF'
 import SearchBox from './SearchBox'
 const Header = (  ) => {
+    const itemsProfile = [
+        {name:"Profile",url:"/profile"},
+        {name:"Settings",url:"/settings"},
+        {name:"Sign Out",url:"/sign_out"}
+
+    ]
   return (
       <header className='flex w-full justify-between h-20  px-10 sticky'>
         <div className='flex items-center  justify-around w-3/5 '>
@@ -21,7 +27,7 @@ const Header = (  ) => {
         <div className='flex items-center w-2/5 px-3'>
             <div className='flex items-center px-3 mx-2'>
                 <Icon icon="carbon:user-avatar" width="45px" className='cursor-pointer' color="#bdbcbf" />
-                <Dropdown name="Alex Srebernic" items={["Profile","Settings","Sign Out"]}/>
+                <Dropdown name="Alex Srebernic" items={itemsProfile}/>
 
             </div>
             <div className=''>

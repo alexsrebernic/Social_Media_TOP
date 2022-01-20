@@ -24,8 +24,8 @@ export const Dropdown = (props) => {
     >
       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div className="py-1 ">
-        {props.items.map((name,index) => {
-            if(name === "Sign Out"){
+        {props.items.map((object,index) => {
+            if(object.name === "Sign Out"){
                 return (
                     <form method="POST" action="#">
                         <Menu.Item key={index}>
@@ -48,13 +48,13 @@ export const Dropdown = (props) => {
                 <Menu.Item key={index}> 
             {({ active }) => (
               <a
-                href="#"
+                href={object.url}
                 className={
                   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                   'block px-4 py-2 text-sm'
                 }
               >
-                {name}
+                {object.name}
               </a>
             )}
           </Menu.Item>
