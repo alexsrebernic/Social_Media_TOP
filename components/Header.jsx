@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import Dropdown from './Dropdown';
 import DropdownNMF from './DropdownNMF'
+import SearchBox from './SearchBox'
 const Header = (  ) => {
   return (
       <header className='flex w-full justify-between h-20  px-10 sticky'>
@@ -13,14 +14,14 @@ const Header = (  ) => {
                 </Link>
             </div>
             <div className='flex items-center mr-20 justify-between input-search w-3/4 h-10'> 
-                <input type="text" placeholder='Search' className='p-2 w-full focus:none'/>
+                    <SearchBox/>
                     <Icon icon="entypo:magnifying-glass" width="28px" color="#bdbcbf"  />
             </div>
         </div>
         <div className='flex items-center w-2/5 px-3'>
             <div className='flex items-center px-3 mx-2'>
                 <Icon icon="carbon:user-avatar" width="45px" className='cursor-pointer' color="#bdbcbf" />
-                <Dropdown name="Alex Srebernic" items={["Profile","Configuration","Sign Out"]}/>
+                <Dropdown name="Alex Srebernic" items={["Profile","Settings","Sign Out"]}/>
 
             </div>
             <div className=''>

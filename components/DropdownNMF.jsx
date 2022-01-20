@@ -24,7 +24,7 @@ export const DropdownNMF = (props) => {
     >
       <Menu.Items className=" origin-top-right overflow-y-auto  over absolute right-0 mt-2 w-96  h-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div className='bg-gray-200 text-bold flex items-center justify-center py-2'><span className='text-white'>{props.title}</span></div>
-        <div className={props.items.length?"py-1 ":"py-1 h-full flex flex-col items-center justify-center"}>
+        <div className={props.items.length?"py-1 ":"py-1 h-full flex flex-col items-center justify-center text-bold"}>
         {props.items.length?(
             <>
             {props.items.map((name,index) => {

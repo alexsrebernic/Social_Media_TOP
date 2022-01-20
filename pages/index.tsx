@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 export default function Home() {
   return (
-    <div className='px-4 mx-6 h-full flex'>
+    <div className='px-4 mx-6 h-full home-container flex'>
       <div className="container-posts w-3/4 px-3 mx-3">
 
       </div>
