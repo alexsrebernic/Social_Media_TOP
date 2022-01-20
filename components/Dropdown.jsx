@@ -23,12 +23,12 @@ export const Dropdown = (props) => {
       leaveTo="transform opacity-0 scale-95"
     >
       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-        <div className="py-1">
-        {props.items.map((name) => {
+        <div className="py-1 ">
+        {props.items.map((name,index) => {
             if(name === "Sign Out"){
                 return (
                     <form method="POST" action="#">
-                        <Menu.Item>
+                        <Menu.Item key={index}>
                         {({ active }) => (
                             <button
                             type="submit"
@@ -45,7 +45,7 @@ export const Dropdown = (props) => {
                 )
             }
             return(
-                <Menu.Item>
+                <Menu.Item key={index}> 
             {({ active }) => (
               <a
                 href="#"

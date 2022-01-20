@@ -18,7 +18,7 @@ const Sidebar = () => {
               </div>
               </Link>
               
-              <Link href="/">
+              <Link href="/messages">
                 <div className='p-4 flex items-center cursor-pointer ' tabIndex={1}>
                     <Icon icon="ant-design:mail-outlined" width="30px" color="#e5e5e7" />
                     <span className='ml-2'>Messages</span>

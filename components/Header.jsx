@@ -1,7 +1,8 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
-import Dropdown from './Dropdown'
+import Dropdown from './Dropdown';
+import DropdownNMF from './DropdownNMF'
 const Header = (  ) => {
   return (
       <header className='flex w-full justify-between h-20  px-10 sticky'>
@@ -24,8 +25,7 @@ const Header = (  ) => {
             </div>
             <div className=''>
                 <Link href="/">
-                <span className='px-3 mx-1 cursor-pointer'>Create</span>
-
+                <span className='px-3 mx-1 cursor-pointer' >Create Post</span>
                 </Link>
                 <Link href="/">
                 <span className='px-3 mr-4 cursor-pointer'>Home</span>
@@ -34,9 +34,12 @@ const Header = (  ) => {
 
             </div>
             <div className='flex ml-5 interactions-header'>
-                <Icon icon="fa-brands:facebook-messenger" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />
-                <Icon icon="ci:notification" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />
-                <Icon icon="fa-solid:user-friends" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />
+                <DropdownNMF name={<Icon icon="fa-brands:facebook-messenger" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} title="Messages" items={[]} noItemsMessage="You don't have any messages"/>
+                <DropdownNMF name={<Icon icon="ci:notification" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={[]} title="Notifications" noItemsMessage="You dont have any notification"/>
+                <DropdownNMF name={<Icon icon="fa-solid:user-friends" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={[]} title="Friends" noItemsMessage="You dont have any friends :("/>
+
+               
+                
             </div>
         </div>
       </header>
