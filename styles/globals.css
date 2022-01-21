@@ -96,13 +96,6 @@ input:focus, textarea:focus, select:focus {
   border-radius: 5px;
 }
 
-.sign-up-form .submit {
-  background-color: #3a3b6a;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
 .tab-pane {
   display: none;
   width: 100%;
@@ -218,5 +211,18 @@ ul .active {
   height: -moz-fit-content;
   height: fit-content;
   overflow: hidden;
+}
+
+.submit {
+  background-color: #3a3b6a;
+  color: white;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.submit:hover {
+  background-color: #212246;
 }
 /*# sourceMappingURL=globals.css.map */

@@ -1,9 +1,24 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import  Layout from '../components/Layout'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 function MyApp({ Component, pageProps }: AppProps) {
-  const [open, setOpen] = useState(true)
+  const [user,setCurrentUser] = useState()
+  useEffect(() => {
+    getCurrentUser()
+  },[])
+  const getCurrentUser = async () => {
+    try {
+      const request = await axios.get('http://localhost:4000/api/user/current',
+      {headers:{Authorization:`Bearer ${localStorage.getItem("token")}` || '{}'}})
+      const result = request.data
+      console.log(result)
+    } catch(e){
+
+    }
+
+  }
   if(Component.name === "SignUpOrLogin"){
     return(
       <Component {...pageProps}/>
@@ -11,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
   return(
     <>
-    <Layout {...setOpen} >
+    <Layout  >
       <Component {...pageProps} />
     </Layout>
     </>

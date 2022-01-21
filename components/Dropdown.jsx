@@ -27,8 +27,8 @@ export const Dropdown = (props) => {
         {props.items.map((object,index) => {
             if(object.name === "Sign Out"){
                 return (
-                    <form method="POST" action="#">
-                        <Menu.Item key={index}>
+                    <form key={index} method="POST" action="#">
+                        <Menu.Item >
                         {({ active }) => (
                             <button
                             type="submit"

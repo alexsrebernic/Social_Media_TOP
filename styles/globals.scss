@@ -99,12 +99,7 @@ input:focus, textarea:focus, select:focus{
         border: 1px solid #9ca3af;
         border-radius: 5px;
     }
-    .submit {
-        background-color: #3a3b6a;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
+
 }
 .tab-pane {
     display: none;
@@ -197,4 +192,14 @@ ul {
 .side-container-profile {
     height: fit-content;
     overflow:hidden;
+}
+.submit {
+    background-color: #3a3b6a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.submit:hover {
+    background-color: #212246;
 }
