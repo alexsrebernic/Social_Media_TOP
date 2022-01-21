@@ -32,9 +32,6 @@ const Header = (  ) => {
             </div>
             <div className=''>
                 <Link href="/">
-                <span className='px-3 mx-1 cursor-pointer' >Create Post</span>
-                </Link>
-                <Link href="/">
                 <span className='px-3 mr-4 cursor-pointer'>Home</span>
 
                 </Link>

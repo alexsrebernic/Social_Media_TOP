@@ -204,4 +204,19 @@ ul .active {
 .profile-container {
   min-height: 91vh;
 }
+
+.container-image-profile {
+  background-color: #f2f2f4;
+}
+
+.container-image-profile div {
+  background-color: white;
+}
+
+.side-container-profile {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: hidden;
+}
 /*# sourceMappingURL=globals.css.map */

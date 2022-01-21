@@ -187,3 +187,14 @@ ul {
 .profile-container {
     min-height: 91vh;
 }
+.container-image-profile {
+    background-color: #f2f2f4;
+    div {
+        background-color: white;
+    }
+}
+
+.side-container-profile {
+    height: fit-content;
+    overflow:hidden;
+}

@@ -7,7 +7,7 @@ export const Dropdown = (props) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
     <div>
-      <Menu.Button className="inline-flex justify-center w-full   shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none   focus:ring-offset-gray-100 ">
+      <Menu.Button className="inline-flex justify-center w-full    px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none   focus:ring-offset-gray-100 ">
         {props.name}
         <Icon icon="bx:bxs-down-arrow" className='ml-2' className="-mr-1 ml-2 mt-1" aria-hidden="true" width="10" />
       </Menu.Button>

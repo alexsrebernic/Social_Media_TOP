@@ -4,11 +4,10 @@ import { Menu, Transition } from '@headlessui/react'
 import { Icon } from '@iconify/react';
 
 export const DropdownNMF = (props) => {
-    console.log(props)
   return (
     <Menu as="div" className="relative inline-block text-left">
     <div>
-      <Menu.Button className="inline-flex justify-center w-full   shadow-sm px-1 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none   focus:ring-offset-gray-100 ">
+      <Menu.Button className="inline-flex justify-center w-full    px-1 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none   focus:ring-offset-gray-100 ">
         {props.name}
       </Menu.Button>
     </div>
