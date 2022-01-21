@@ -32,38 +32,21 @@ export const Register = () => {
       });
       const result = request.data
       if(result.status === 200){
-        const data = {
-          email:emailValue,
-          password:passwordValue
-        }
-        try {
-          const request =await axios({
-            method: 'post',
-            url: 'https://vast-citadel-97852.herokuapp.com/api/users/log_in',
-            data,
-            headers:{
-              "Content-Type":"application/json"
-            },
-          });
-          const result =  request.data
-          if(result.status === 200){
-            localStorage.setItem("token",result.data.token)
-            Router.push('/')
-          }
-        } catch(e){
-          const errorMessage = document.getElementById("error-message")
-
-          console.log(e.response)
-            errorMessage.style.display = "block"
-            errorMessage.textContent = e.response.data.message
-            setTimeout(() => {
-            errorMessage.style.display = "none"
-          }, 3000);
-        }
+        const errorMessage = document.getElementById("message-button")
+        console.log(e)
+          errorMessage.value = "Done!, please Log In"
+          errorMessage.style.backgroundColor = "green"
+          errorMessage.style.pointerEvents = "none"
+          setTimeout(() => {
+          errorMessage.value = "Sign Up"
+          errorMessage.style.pointerEvents = "all"
+          errorMessage.style.backgroundColor = "#3a3b6a"
+  
+        }, 2000);
      
       }
     } catch (e){
-      const errorMessage = document.getElementById("error-message-button")
+      const errorMessage = document.getElementById("message-button")
       console.log(e)
         errorMessage.value = e.response.data.message
         errorMessage.style.backgroundColor = "red"
@@ -93,7 +76,7 @@ export const Register = () => {
         </select>
         <label htmlFor="date_of_birth">Date of birth</label>
         <input id='date-sign-up-input' name='date_of_birth' type="date" required/>
-      <input  type="submit" className='submit' value={"Sign Up"} id='error-message-button'/>
+      <input  type="submit" className='submit' value={"Sign Up"} id='message-button'/>
     </form>
   
   </div>

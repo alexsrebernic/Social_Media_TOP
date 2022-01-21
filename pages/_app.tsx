@@ -10,12 +10,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   },[])
   const getCurrentUser = async () => {
     try {
-      const request = await axios.get('http://localhost:4000/api/user/current',
+      const request = await axios.get('https://vast-citadel-97852.herokuapp.com/api/user/current',
       {headers:{Authorization:`Bearer ${localStorage.getItem("token")}` || '{}'}})
       const result = request.data
       console.log(result)
     } catch(e){
-
+      
     }
 
   }
