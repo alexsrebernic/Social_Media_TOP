@@ -4,7 +4,7 @@ export const messages = ({user}) => {
     console.log(user)
   return (
   <div className='w-full h-full flex px-10 py-12 '>
-    <div className='border rounded-xl flex w-11/12 '>
+    <div className='border rounded-xl flex w-11/12 bg-white shadow-md'>
         <div className='border-r w-2/6'>
             <div>
                 <div className='w-full flex items-center justify-center p-3  title-side-chat border-b'><span>Messages</span></div>

@@ -13,7 +13,7 @@ export const profile = ({user}) => {
   return (
   <div className=' w-full '>
     <div className='profile-container px-12 py-4 flex '>
-        <div className='w-1/4 border shadow-md rounded side-container-profile'>
+        <div className='w-1/4 border shadow-md rounded side-container-profile bg-white'>
             <div className='h-96 flex items-center justify-center border-b container-image-profile' >
                 <div className='border w-72 h-72 rounded-full shadow flex justify-center items-center'>
                 <Icon icon="bx:bx-image-alt" className='hidden' width="40px"/>
@@ -95,7 +95,7 @@ export const profile = ({user}) => {
                 </div>
             </div>
         </div>
-        <div className='w-3/4 mx-5 border shadow-md rounded container-post-profile'>
+        <div className='w-3/4 mx-5 border shadow-md rounded container-post-profile bg-white'>
             <div className='h-96 border-b w-full flex justify-center items-center banner-profile'>
                 <Icon icon="bx:bx-image-alt" className='hidden' width="40px"/>
 

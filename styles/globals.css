@@ -34,6 +34,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .content {
+  background-color: #f6f8fa;
   z-index: 2;
   box-shadow: -7px 1px 17px -2px rgba(58, 59, 106, 0.12);
   -webkit-box-shadow: -7px 1px 17px -2px rgba(58, 59, 106, 0.12);
@@ -264,5 +265,9 @@ ul .active {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.bg-first {
+  background-color: #3a3b6a;
 }
 /*# sourceMappingURL=globals.css.map */

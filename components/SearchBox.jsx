@@ -8,7 +8,7 @@ export const SearchBox = () => {
   return (
     <div  className="relative w-full inline-block text-left">
     <div>
-      <input onClick={() => setSearchBox((isShowing) => !isShowing)} type="text" placeholder='Search' className='p-2 w-full ' aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-300"/>
+      <input onClick={() => setSearchBox((isShowing) => !isShowing)} id='search-input' type="text" placeholder='Search' className='p-2 w-full ' aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-300"/>
     </div>
 
     <Transition
