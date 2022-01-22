@@ -23,7 +23,8 @@ export const DropdownNMF = (props) => {
     >
       <Menu.Items className=" origin-top-right overflow-y-auto  over absolute right-0 mt-2 w-96  h-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div className='bg-gray-200 text-bold flex items-center justify-center py-2'><span className='text-white'>{props.title}</span></div>
-        <div className={props.items.length?"py-1 ":"py-1 h-full flex flex-col items-center justify-center text-bold"}>
+        {props.items?(
+          <div className={props.items.length?"py-1 ":"py-1 h-full flex flex-col items-center justify-center text-bold"}>
         {props.items.length?(
             <>
             {props.items.map((name,index) => {
@@ -48,11 +49,13 @@ export const DropdownNMF = (props) => {
         ):(
             <span className='text-gray-400'>{props.noItemsMessage}</span>
         )}
-  
-        
-         
-      
         </div>
+        ):(
+          <div className='py-1 h-full flex flex-col items-center justify-center text-bold'>
+        <Icon  icon="gg:spinner" className='block animate-spin bg-red'  width="24px" />
+        </div>
+        )}
+       
       </Menu.Items>
     </Transition>
   </Menu>

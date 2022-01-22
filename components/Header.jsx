@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import Dropdown from './Dropdown';
 import DropdownNMF from './DropdownNMF'
 import SearchBox from './SearchBox'
-const Header = (  ) => {
+const Header = ( {user,} ) => {
+    const [isLoading,setIsLoading] = useState(true)
+    const [userData,setUserData] = useState({})
+    useEffect(() => {
+        if(user !== ""){
+            setIsLoading(false)
+        }
+        setUserData(user)
+    },[user])
+ 
     const itemsProfile = [
         {name:"Profile",url:"/profile"},
         {name:"Settings",url:"/settings"},
         {name:"Sign Out",url:"/sign_out"}
 
     ]
-  return (
+    console.log(userData)
+    return (
       <header className='flex w-full justify-between h-20  px-10 sticky'>
         <div className='flex items-center  justify-around w-3/5 '>
             <div className='logo'>
@@ -27,7 +37,7 @@ const Header = (  ) => {
         <div className='flex items-center w-2/5 px-3'>
             <div className='flex items-center px-3 mx-2'>
                 <Icon icon="carbon:user-avatar" width="45px" className='cursor-pointer' color="#bdbcbf" />
-                <Dropdown name="Alex Srebernic" items={itemsProfile}/>
+                <Dropdown isLoading={isLoading} name={userData.full_name} items={itemsProfile}/>
 
             </div>
             <div className=''>
@@ -38,9 +48,9 @@ const Header = (  ) => {
 
             </div>
             <div className='flex ml-5 interactions-header'>
-                <DropdownNMF name={<Icon icon="fa-brands:facebook-messenger" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} title="Messages" items={[]} noItemsMessage="You don't have any messages"/>
-                <DropdownNMF name={<Icon icon="ci:notification" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={[]} title="Notifications" noItemsMessage="You dont have any notification"/>
-                <DropdownNMF name={<Icon icon="fa-solid:user-friends" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={[]} title="Friends" noItemsMessage="You dont have any friends :("/>
+                <DropdownNMF name={<Icon icon="fa-brands:facebook-messenger" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} title="Messages" items={userData.chats}  noItemsMessage="You don't have any messages"/>
+                <DropdownNMF name={<Icon icon="ci:notification" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={userData.notifications} title="Notifications"  noItemsMessage="You dont have any notification"/>
+                <DropdownNMF name={<Icon icon="fa-solid:user-friends" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={userData.friends} title="Friends"  noItemsMessage="You dont have any friends :("/>
 
                
                 
