@@ -204,6 +204,31 @@ ul .active {
 
 .container-image-profile div {
   background-color: white;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.container-image-profile div:hover {
+  background-color: rgba(197, 197, 197, 0.5);
+  cursor: pointer;
+}
+
+.container-image-profile div:hover svg {
+  display: block;
+}
+
+.banner-profile {
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.banner-profile:hover {
+  background-color: rgba(197, 197, 197, 0.5);
+  cursor: pointer;
+}
+
+.banner-profile:hover svg {
+  display: block;
 }
 
 .side-container-profile {
@@ -224,5 +249,20 @@ ul .active {
 
 .submit:hover {
   background-color: #212246;
+}
+
+.defaultanimation {
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.container-posts {
+  height: 200vh;
+}
+
+.container-friend-request {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 /*# sourceMappingURL=globals.css.map */

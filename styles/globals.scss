@@ -184,11 +184,31 @@ ul {
 }
 .container-image-profile {
     background-color: #f2f2f4;
+    
     div {
         background-color: white;
-    }
-}
+        transition: 0.3s ease;
 
+    }
+    div:hover {
+        background-color: rgba($color: #c5c5c5, $alpha: 0.5);
+        cursor: pointer;
+       svg {
+           display: block;
+       }
+    }
+  
+}
+.banner-profile {
+    transition: 0.3s ease;
+}
+.banner-profile:hover {
+        background-color: rgba($color: #c5c5c5, $alpha: 0.5);
+        cursor: pointer;
+       svg {
+           display: block;
+       }
+}
 .side-container-profile {
     height: fit-content;
     overflow:hidden;
@@ -202,4 +222,13 @@ ul {
 }
 .submit:hover {
     background-color: #212246;
+}
+.defaultanimation {
+    transition: 0.3s ease;
+}
+.container-posts {
+    height: 200vh;
+}
+.container-friend-request {
+    height:fit-content ;
 }

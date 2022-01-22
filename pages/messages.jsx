@@ -2,7 +2,6 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 export const messages = ({user}) => {
     console.log(user)
-    const chats = []
   return (
   <div className='w-full h-full flex px-10 py-12 '>
     <div className='border rounded-xl flex w-11/12 '>
@@ -17,13 +16,25 @@ export const messages = ({user}) => {
                     </div>
                 </div>
             </div>
-            <div className={chats.length?'container-chats  px-3 ':'container-chats flex justify-center items-center text-bold'}>
-                {chats.length?(
+            {user.chats?(
+
+            <div className={user.chats.length?'container-chats  px-3 ':'container-chats flex justify-center items-center text-bold'}>
+                 <>
+                 {user.chats.length?(
                     <h1>Message random</h1>
                 ):(
                     <span className='text-gray-400'>You don't have any chat </span>
                 )}
+                 </>
             </div>
+             ):(
+                 <div className='container-chats flex justify-center items-center text-bold'>
+                <Icon  icon="gg:spinner" className='block animate-spin bg-red my-5' width="35px" />
+
+                 </div>
+
+             )}
+               
         </div>
         <div className='w-4/6'>
             <div className='h-full'>
