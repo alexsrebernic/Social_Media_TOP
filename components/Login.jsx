@@ -1,8 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import Router from 'next/router';
+import { Icon } from '@iconify/react';
+import { useState } from 'react';
 export const Login = () => {
+  const [isLoading,setIsLoading] = useState(false)
+
     const submitLogIn = async (e) => {
+      const errorMessage = document.getElementById("message-button-log-in")
+      const spanMessage = document.getElementById("text-message-login")
+      spanMessage.textContent = ""
+      setIsLoading(true)
       e.preventDefault()
       const email = document.getElementById("email-log-in-input")
       const password = document.getElementById("password-log-in-input")
@@ -22,16 +30,18 @@ export const Login = () => {
         const result = await request
         console.log(result)
         if(result.status === 200){
+          setIsLoading(false)
           localStorage.setItem("token",result.data.token)
+          spanMessage.textContent = "Log in"
           Router.push("/")
         }
       } catch (e){
-        const errorMessage = document.getElementById("error-message-login-button")
-        errorMessage.value = e.response.data.message
+        setIsLoading(false)
+        spanMessage.value = e.response.data.message
         errorMessage.style.backgroundColor = "red"
         errorMessage.style.pointerEvents = "none"
         setTimeout(() => {
-        errorMessage.value = "Sign Up"
+          spanMessage.value = "Sign Up"
         errorMessage.style.pointerEvents = "all"
         errorMessage.style.backgroundColor = "#3a3b6a"
 
@@ -43,8 +53,12 @@ export const Login = () => {
     <form onSubmit={submitLogIn}   method='POST' action="" className='flex flex-col sign-up-form w-full'>
           <input id='email-log-in-input' type="email" name='email' placeholder='Email' required/>
           <input id='password-log-in-input' type="password" name='password' placeholder='Password' required/>
-      <input type="submit" className='submit' value={"Log in"} id='error-message-login-button'/>
-     
+        <button  type="submit" className='submit rounded py-2 mt-3 flex justify-center items-center' value={"Sign Up"} id='message-button-log-in'>
+          <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin':"hidden"}  width="24px" />
+          <span id='text-message-login'> 
+            Sign Up
+          </span>
+        </button>
 
     </form>
     

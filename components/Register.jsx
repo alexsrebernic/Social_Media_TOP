@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import axios from 'axios';
 import Router from 'next/router';
 export const Register = () => {
+  const [isLoading,setIsLoading] = useState(false)
+
+   
   const submitRegister = async (e) => {
+    const errorMessage = document.getElementById("message-button")
+    const textMessage = document.getElementById('text-message')
+    textMessage.textContent = ""
+    setIsLoading(true)
     e.preventDefault()
     const emailValue = document.getElementById("email-sign-up-input").value
     const firstNameValue = document.getElementById("first-name-sign-up-input").value
@@ -30,15 +37,15 @@ export const Register = () => {
           "Content-Type":"application/json"
         },
       });
-      const result = request.data
-      if(result.status === 200){
-        const errorMessage = document.getElementById("message-button")
-        console.log(e)
-          errorMessage.value = "Done!, please Log In"
+      const result = request
+      console.log(result.status)
+      if(result.status === 201){
+          setIsLoading(false)
+          textMessage.textContent = "Done!, please Log In"
           errorMessage.style.backgroundColor = "green"
           errorMessage.style.pointerEvents = "none"
           setTimeout(() => {
-          errorMessage.value = "Sign Up"
+          textMessage.textContent = "Sign Up"
           errorMessage.style.pointerEvents = "all"
           errorMessage.style.backgroundColor = "#3a3b6a"
   
@@ -46,13 +53,12 @@ export const Register = () => {
      
       }
     } catch (e){
-      const errorMessage = document.getElementById("message-button")
-      console.log(e)
-        errorMessage.value = e.response.data.message
+      setIsLoading(false)
+        textMessage.textContent = e.response.data.message
         errorMessage.style.backgroundColor = "red"
         errorMessage.style.pointerEvents = "none"
         setTimeout(() => {
-        errorMessage.value = "Sign Up"
+        textMessage.textContent = "Sign Up"
         errorMessage.style.pointerEvents = "all"
         errorMessage.style.backgroundColor = "#3a3b6a"
 
@@ -76,7 +82,12 @@ export const Register = () => {
         </select>
         <label htmlFor="date_of_birth">Date of birth</label>
         <input id='date-sign-up-input' name='date_of_birth' type="date" required/>
-      <input  type="submit" className='submit' value={"Sign Up"} id='message-button'/>
+        <button  type="submit" className='submit rounded py-2 mt-3 flex justify-center items-center' value={"Sign Up"} id='message-button'>
+          <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin':"hidden"}  width="24px" />
+          <span id='text-message'> 
+            Sign Up
+          </span>
+        </button>
     </form>
   
   </div>

@@ -3,19 +3,24 @@ import type { AppProps } from 'next/app'
 import  Layout from '../components/Layout'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-function MyApp({ Component, pageProps }: AppProps) {
-  const [user,setCurrentUser] = useState()
+import { useRouter } from 'next/router'
+function MyApp({ Component, pageProps, }: AppProps) {
+  const router = useRouter()
+  const [user,setCurrentUser] = useState("")
   useEffect(() => {
+    pageProps.user = user
     getCurrentUser()
-  },[])
+  },[router.pathname])
   const getCurrentUser = async () => {
     try {
       const request = await axios.get('https://vast-citadel-97852.herokuapp.com/api/user/current',
       {headers:{Authorization:`Bearer ${localStorage.getItem("token")}` || '{}'}})
       const result = request.data
-      console.log(result)
+      if(result.authData.user){
+        setCurrentUser(result.authData.user)
+      }
     } catch(e){
-      
+      console.log(e)
     }
 
   }

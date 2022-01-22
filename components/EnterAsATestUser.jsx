@@ -1,8 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import Router from 'next/router';
+import { useState } from 'react';
+import { Icon } from '@iconify/react';
 export const EnterAsATestUser = () => {
+  const [isLoading,setIsLoading] = useState(false)
+  
   const submitLogIn = async (e) => {
+    const spanMessage = document.getElementById("text-message-test")
+    spanMessage.textContent = ""
+    setIsLoading(true)
     e.preventDefault()
   const data = {
     email:"testUser@gmail.com",
@@ -34,7 +41,11 @@ export const EnterAsATestUser = () => {
             <li>Change the name of the user test</li>
             <li>Make friend request's</li>
         </ul>
-        <input onClick={submitLogIn} type="submit" className='user-button bg-red cursor-pointer'  value={"Enter"}/>
-  </div>);
+        <button onClick={submitLogIn}  type="submit" className='submit rounded py-2 mt-3 flex justify-center items-center w-full' value={"Sign Up"} id='message-button-test'>
+          <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin':"hidden"}  width="24px" />
+          <span id='text-message-test'> 
+            Sign Up
+          </span>
+        </button>  </div>);
 };
 export default EnterAsATestUser

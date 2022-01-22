@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
-export const messages = (props) => {
+export const messages = () => {
     const chats = []
   return (
   <div className='w-full h-full flex px-10 py-12 '>
