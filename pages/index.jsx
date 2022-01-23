@@ -2,7 +2,6 @@ import Head from 'next/head'
 
 
 import PostLoad from '../components/postLoad'
-import axios from 'axios';
 import Post from '../components/Post'
 import InputPost from '../components/InputPost'
 import FriendRequestContainer from '../components/FriendRequestContainer'
@@ -21,7 +20,7 @@ export default function Home({user,posts}) {
                         <Post posts={posts}/>
                       </>
                     ):(
-                      <div>
+                      <div className='flex justify-center items-center my-6 text-gray-400'>
                         <h1>No posts today.</h1>
                       </div>
                     )}
