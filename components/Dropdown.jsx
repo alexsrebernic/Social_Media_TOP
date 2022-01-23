@@ -12,8 +12,11 @@ export const Dropdown = (props) => {
         <Icon  icon="gg:spinner" className={props.isLoading? 'block animate-spin bg-red':"hidden"}  width="24px" />
          {props.name}
          
-        
-        <Icon icon="bx:bxs-down-arrow" className='ml-2' className="-mr-1 ml-2 mt-1" aria-hidden="true" width="10" />
+        {props.dropDownIcon?(
+          <Icon icon="bx:bxs-down-arrow" className='ml-2' className="-mr-1 ml-2 mt-1" aria-hidden="true" width="10" />
+        ):(
+          null
+        )}
       </Menu.Button>
     </div>
 

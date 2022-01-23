@@ -17,7 +17,7 @@ export const Register = () => {
     const lastNameValue = document.getElementById("last-name-sign-up-input").value
     const passwordValue = document.getElementById("password-sign-up-input").value
     const secondPasswordValue = document.getElementById("second-password-sign-up-input").value
-
+    const genderValue = document.getElementById("gender-sign-up-input").value
     const dateValue = document.getElementById("date-sign-up-input").value
     const data = {
       "email":emailValue,
@@ -25,8 +25,8 @@ export const Register = () => {
       "last_name":lastNameValue,
       "password":passwordValue,
       "secondpassword":secondPasswordValue,
-      "gender":"Male",
-      "date_of_birth":dateValue
+      "gender":genderValue,
+      "date_of_birth":dateValue,
     }
     try {
       const request = await axios({
@@ -41,7 +41,7 @@ export const Register = () => {
       console.log(result.status)
       if(result.status === 201){
           setIsLoading(false)
-          textMessage.textContent = "Done!, please Log In"
+          textMessage.textContent = "Done! please Log In"
           errorMessage.style.backgroundColor = "green"
           errorMessage.style.pointerEvents = "none"
           setTimeout(() => {
@@ -75,7 +75,7 @@ export const Register = () => {
           <input id='password-sign-up-input' type="password" name='password' placeholder='Password*' />
           <input id='second-password-sign-up-input' type="password" name='secondpassword' placeholder='Confirm Password*' required/>
         <label htmlFor="gender">Gender</label>
-        <select id="gender-sign-up-input" name="gender" id="">
+        <select id="gender-sign-up-input" name="gender" >
           <option value="Male">Male</option>
           <option value="Women">Women</option>
           <option value="Other">Other</option>

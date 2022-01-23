@@ -155,6 +155,7 @@ ul {
 }
 .home-container {
     min-height: 91vh;
+    background-color: #f6f8fa;
 }
 .messages-page {
     max-height: 91vh;
@@ -246,5 +247,10 @@ ul {
     span {
         background:#fff; 
         padding:0 10px; 
+    }
+}
+.avatar {
+    span {
+        padding-top: 5px;
     }
 }

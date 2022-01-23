@@ -163,6 +163,7 @@ ul .active {
 
 .home-container {
   min-height: 91vh;
+  background-color: #f6f8fa;
 }
 
 .messages-page {
@@ -282,5 +283,9 @@ ul .active {
 .final-text span {
   background: #fff;
   padding: 0 10px;
+}
+
+.avatar span {
+  padding-top: 5px;
 }
 /*# sourceMappingURL=globals.css.map */

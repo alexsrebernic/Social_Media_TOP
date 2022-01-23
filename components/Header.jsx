@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Dropdown from './Dropdown';
 import DropdownNMF from './DropdownNMF'
 import SearchBox from './SearchBox'
+import Avatar from 'react-avatar';
 const Header = ( {user,} ) => {
     const [isLoading,setIsLoading] = useState(true)
     const [userData,setUserData] = useState({})
@@ -35,8 +36,19 @@ const Header = ( {user,} ) => {
         </div>
         <div className='flex items-center w-2/5 px-3'>
             <div className='flex items-center px-3 mx-2'>
-                <Icon icon="carbon:user-avatar" width="45px" className='cursor-pointer' color="#bdbcbf" />
-                <Dropdown isLoading={isLoading} name={userData.full_name} items={itemsProfile}/>
+                {userData?(
+                    <>
+                        {typeof userData.profileImg !== 'undefined'?(
+                            
+                            <h1>asdasd</h1>
+                        ):(
+                            <Avatar name={userData.full_name} color='gray' className='avatar'   size="40" round={true}/>
+                        )}
+                    </>
+                ):(
+                    <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red my-5':"hidden"}  width="15px" />
+                )}
+                <Dropdown isLoading={isLoading} name={userData.full_name} items={itemsProfile} dropDownIcon={true}/>
 
             </div>
             <div className=''>

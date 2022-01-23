@@ -10,6 +10,9 @@ function MyApp({ Component, pageProps }) {
   socket.on('connect',(socket) => {
     console.log("user connected")
   })
+  socket.on('post:create',post => {
+    console.log(post)
+  })
   if (typeof window !== 'undefined') {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}` || '{}';
     axios.defaults.headers.post['Content-Type'] = "application/json";
@@ -31,7 +34,6 @@ function MyApp({ Component, pageProps }) {
         axios.get('https://vast-citadel-97852.herokuapp.com/api/users/'),
         axios.get('https://vast-citadel-97852.herokuapp.com/api/posts/')
       ]).then(axios.spread((currentUser,users,posts) => {
-        console.log(currentUser.data,users.data,posts.data)
         setCurrentUser(currentUser.data.authData.user)
         setArrayOfUsers(users.data)
         setArrayOfPosts(posts.data)
