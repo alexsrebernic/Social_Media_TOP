@@ -9,7 +9,6 @@ export const profile = ({user}) => {
         }
         setUserData(user)
     },[user])
-    console.log(user)
   return (
   <div className=' w-full '>
     <div className='profile-container px-12 py-4 flex '>

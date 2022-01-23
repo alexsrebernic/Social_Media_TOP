@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import  { AppProps } from 'next/app'
 import  Layout from '../components/Layout'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -9,21 +8,34 @@ function MyApp({ Component, pageProps }) {
   const hostSocket = 'localhost:3001'
   let socket = io(hostSocket)
   socket.on('connect',(socket) => {
-    console.log("asd")
-
-  
+    console.log("user connected")
   })
+  if (typeof window !== 'undefined') {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}` || '{}';
+    axios.defaults.headers.post['Content-Type'] = "application/json";
+  }
+  
   const router = useRouter()
   const [user,setCurrentUser] = useState("")
+  const [users,setArrayOfUsers] = useState("")
+  const [posts,setArrayOfPosts] = useState("")
   useEffect(() => {
-    getUserId()
-  },[router.pathname])
-  async function getUserId() {
+    if((router.pathname === "/" || router.pathname === "/profile" || router.pathname === "/settings" || router.pathname === "messages") && user === ""){
+      fetchData()
+    } 
+   },[router.pathname])
+  async function fetchData() {
     try {
-      const request = await axios.get('https://vast-citadel-97852.herokuapp.com/api/user/current',
-      {headers:{Authorization:`Bearer ${localStorage.getItem("token")}` || '{}'}})
-      const result = request.data
-      setCurrentUser(result.authData.user)
+      axios.all([
+        axios.get('https://vast-citadel-97852.herokuapp.com/api/user/current'),
+        axios.get('https://vast-citadel-97852.herokuapp.com/api/users/'),
+        axios.get('https://vast-citadel-97852.herokuapp.com/api/posts/')
+      ]).then(axios.spread((currentUser,users,posts) => {
+        console.log(currentUser.data,users.data,posts.data)
+        setCurrentUser(currentUser.data.authData.user)
+        setArrayOfUsers(users.data)
+        setArrayOfPosts(posts.data)
+      }))
     } catch(e){
 
       console.log(e)
@@ -38,7 +50,7 @@ function MyApp({ Component, pageProps }) {
   return(
     <>
     <Layout user={user}  >
-      <Component {...pageProps} user={user}  />
+      <Component {...pageProps} user={user} posts={posts} />
     </Layout>
     </>
   )

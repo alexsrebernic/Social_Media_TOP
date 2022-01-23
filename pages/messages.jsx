@@ -1,7 +1,6 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 export const messages = ({user}) => {
-    console.log(user)
   return (
   <div className='w-full h-full flex px-10 py-12 '>
     <div className='border rounded-xl flex w-11/12 bg-white shadow-md'>

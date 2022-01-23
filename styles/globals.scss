@@ -237,3 +237,14 @@ ul {
     background-color: #3a3b6a;
 
 }
+.final-text {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #9da4b0; 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+    span {
+        background:#fff; 
+        padding:0 10px; 
+    }
+}

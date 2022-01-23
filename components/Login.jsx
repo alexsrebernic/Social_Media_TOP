@@ -41,7 +41,7 @@ export const Login = () => {
         errorMessage.style.backgroundColor = "red"
         errorMessage.style.pointerEvents = "none"
         setTimeout(() => {
-          spanMessage.value = "Sign Up"
+          spanMessage.value = "Log In"
         errorMessage.style.pointerEvents = "all"
         errorMessage.style.backgroundColor = "#3a3b6a"
 
@@ -56,7 +56,7 @@ export const Login = () => {
         <button  type="submit" className='submit rounded py-2 mt-3 flex justify-center items-center' value={"Sign Up"} id='message-button-log-in'>
           <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin':"hidden"}  width="24px" />
           <span id='text-message-login'> 
-            Sign Up
+            Log In
           </span>
         </button>
 
