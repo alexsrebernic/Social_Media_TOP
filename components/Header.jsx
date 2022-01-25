@@ -46,7 +46,7 @@ const Header = ( {user,} ) => {
                         )}
                     </>
                 ):(
-                    <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red my-5':"hidden"}  width="15px" />
+                    null
                 )}
                 <Dropdown isLoading={isLoading} name={userData.full_name} items={itemsProfile} dropDownIcon={true}/>
 

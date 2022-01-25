@@ -1,15 +1,28 @@
 import React, { useState,useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import SideContainerProfile from '../components/SideContainerProfile';
+import Post from '../components/Post'
+import axios from 'axios';
 export const profile = ({user}) => {
     const [isLoading,setIsLoading] = useState(true)
     const [userData,setUserData] = useState({})
+    const [userPosts,setUserPosts] = useState({})
     useEffect(() => {
         if(user !== ""){
+            getPostsUser()
             setIsLoading(false)
+
         }
         setUserData(user)
+
     },[user])
+    const getPostsUser = async () => {
+        console.log(user._id)
+        const requestPosts = await axios.get(`http://localhost:4000/api/user/get_posts/${user._id}`)
+        const result = requestPosts.data.posts
+        console.log(result)
+        setUserPosts(result.reverse())
+    }
   return (
   <div className=' w-full '>
     <div className='profile-container px-12 py-4 flex '>
@@ -25,19 +38,16 @@ export const profile = ({user}) => {
                         <span className='text-2xl border-b'>{
                             userData.full_name
                             }
-                            <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red':"hidden"}  width="24px" />
                             
                             </span>
-                    </div>
+                    </div> 
                     <div>
-                      {userData.posts?(
+                      {userPosts?(
                           <>
-                              {userData.posts.length?(
-                                userData.posts.map(() => {
-                              <div>
-
-                              </div>
-                          })
+                              {userPosts.length?(
+                               <>
+                                <Post posts={userPosts}/>
+                               </>
                               ):(
                             <div className='flex flex-col justify-center items-center my-6'>
                               <h1 className='text-gray-300'>You don't have post's</h1>

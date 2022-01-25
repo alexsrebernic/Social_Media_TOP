@@ -155,7 +155,6 @@ ul {
 }
 .home-container {
     min-height: 91vh;
-    background-color: #f6f8fa;
 }
 .messages-page {
     max-height: 91vh;
@@ -228,9 +227,7 @@ ul {
 .defaultanimation {
     transition: 0.3s ease;
 }
-.container-posts {
-    height: 200vh;
-}
+
 .container-friend-request {
     height:fit-content ;
 }
@@ -253,4 +250,7 @@ ul {
     span {
         padding-top: 5px;
     }
+}
+.container-posts {
+    max-height: fit-content;
 }

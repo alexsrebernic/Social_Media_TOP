@@ -21,14 +21,13 @@ export const Login = () => {
       try {
         const request = axios({
           method: 'post',
-          url: 'https://vast-citadel-97852.herokuapp.com/api/users/log_in',
+          url: 'http://localhost:4000/api/users/log_in',
           data,
           headers:{
             "Content-Type":"application/json"
           },
         });
         const result = await request
-        console.log(result)
         if(result.status === 200){
           setIsLoading(false)
           localStorage.setItem("token",result.data.token)

@@ -163,7 +163,6 @@ ul .active {
 
 .home-container {
   min-height: 91vh;
-  background-color: #f6f8fa;
 }
 
 .messages-page {
@@ -258,10 +257,6 @@ ul .active {
   transition: 0.3s ease;
 }
 
-.container-posts {
-  height: 200vh;
-}
-
 .container-friend-request {
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -287,5 +282,11 @@ ul .active {
 
 .avatar span {
   padding-top: 5px;
+}
+
+.container-posts {
+  max-height: -webkit-fit-content;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
 }
 /*# sourceMappingURL=globals.css.map */
