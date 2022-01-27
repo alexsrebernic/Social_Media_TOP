@@ -3,12 +3,23 @@ import Avatar from 'react-avatar';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import Dropdown from './Dropdown';
-export const Post = ({posts,user}) => {
+import axios from 'axios';
+export const Post = ({posts,user,setArrayOfPosts}) => {
+    const deletePost = async (id) => {
+        try {
+        const request = await axios.post(`http://localhost:4000/api/posts/delete/${id}`)
+        const newArray = posts.filter(post => post._id !== id)
+        setArrayOfPosts(newArray)
+        } catch(e){
+            console.log(e)
+        }
+    }
   return (
     <>
     {posts?(
         <>
             {posts.map((post,index) => {
+
                 return(
                 <div key={index} className='border shadow-md my-6 px-5 py-4 bg-white'>
                     <div className='flex items-center justify-between'>
@@ -28,9 +39,15 @@ export const Post = ({posts,user}) => {
                                 <span className='text-sm text-gray-400'>{post.date}</span>
                             </div>
                         </div>
-                        <div>
-                            <Dropdown items={[]} name={<Icon icon="bi:three-dots-vertical" width="20px"/>} dropDownIcon={false}/>
-                        </div>
+                        {user._id === post.author._id?(
+                            <div>
+                                
+                                <Dropdown items={[{name:"Delete",delete:() => deletePost(post._id)}]} name={<Icon icon="bi:three-dots-vertical" width="20px"/>} dropDownIcon={false}/>
+                            </div>
+                        ):(
+                            null
+                        )}
+                       
                     </div>
                     <div className='py-6'>
                         <div>
@@ -48,14 +65,16 @@ export const Post = ({posts,user}) => {
                     </div>
                     <div >
                         <div className='flex border-t pt-3'>
-                            <span className='mx-3'>
+                            <span className='mx-3 flex'>
                                 <Icon icon="ant-design:like-filled" width="25px" className='cursor-pointer'/>
                             </span>
                             <span className='mx-3'>
                                 <Icon icon="ant-design:dislike-filled" width="25px" className='cursor-pointer'/>
                             </span>
                             <span className='mx-3'>
-                                <Icon icon="akar-icons:comment" width="25px" className='cursor-pointer'/>
+                                <Link href={`/post/${post._id}`} id={post._id}>
+                                    <Icon icon="akar-icons:comment" width="25px" className='cursor-pointer'/>
+                                </Link>
                             </span>
 
                         </div>

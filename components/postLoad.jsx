@@ -2,7 +2,7 @@ import React from 'react';
 
 export const postLoad = () => {
   return (
-    <div className="border  shadow-md rounded-md p-4 py-8 h-46 w-full my-6">
+    <div className="border  shadow-md rounded-md p-4 py-8 h-46 w-full my-6 bg-white">
     <div className="animate-pulse flex space-x-4">
       <div className="rounded-full bg-slate-700 h-10 w-10"></div>
       <div className="flex-1 space-y-6 py-1">

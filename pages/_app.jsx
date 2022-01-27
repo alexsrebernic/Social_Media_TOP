@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
   }
   
   const router = useRouter()
+  const [comments,setComments] = useState('')
   const [user,setCurrentUser] = useState("")
   const [users,setArrayOfUsers] = useState("")
   const [posts,setArrayOfPosts] = useState("")
@@ -21,48 +22,46 @@ function MyApp({ Component, pageProps }) {
     socket.once('connect',(socket) => {
       console.log("User connected")
     })
-  
+    socket.on('post:create',post => {
+      addPost(post)
+    })
+    socket.on('comment:create',comment => {
+      console.log(comment)
+    })
   },[])
-  
-   
-  socket.once('post:create',post => {
-    addPost(post)
-  })
+ 
+
  
   const addPost = (post) => { 
-    console.log(post)
-    console.log(posts)
-    if(posts.length >= 10){
-      console.log("passed")
-    setArrayOfPosts([post,...posts])
-
-    }
+    setArrayOfPosts(posts => [post,...posts])
   }
   useEffect(() => {
-    if((router.pathname === "/" || router.pathname === "/profile" || router.pathname === "/settings" || router.pathname === "messages") && user === ""){
+    if(router.pathname !== "/sign_up_or_login" && user === ""){
       fetchData()
     } 
    },[router.pathname])
 
   async function fetchData() {
-    try {
-      const request = await axios.get('http://localhost:4000/api/user/current').then((response) => {
-        axios.all([
-          axios.get(`http://localhost:4000/api/users/${response.data.userId}`),
-          axios.get('http://localhost:4000/api/users/'),
-          axios.get('http://localhost:4000/api/posts/')
-        ]).then(axios.spread((user,users,posts) => {
-          setCurrentUser(user.data)
-          setArrayOfUsers(users.data.users)
-          setArrayOfPosts(posts.data)
-        }))
-      })
-     
-    } catch(e){
-
-      console.log(e)
-    }
+    
+      try {
+        const request = await axios.get('http://localhost:4000/api/user/current').then((response) => {
+          axios.all([
+            axios.get(`http://localhost:4000/api/users/${response.data.userId}`),
+            axios.get('http://localhost:4000/api/users/'),
+            axios.get(`http://localhost:4000/api/posts/`)
+          ]).then(axios.spread((user,users,posts) => {
+            setCurrentUser(user.data)
+            setArrayOfUsers(users.data.users)
+            setArrayOfPosts(posts.data)
+          }))
+        })
+       
+      } catch(e){
+        console.log(e)
+      }
+   
   }
+ 
   if(Component.name === "SignUpOrLogin"){
     return(
       <Component {...pageProps}/>
@@ -72,7 +71,7 @@ function MyApp({ Component, pageProps }) {
   return(
     <>
     <Layout user={user}  >
-      <Component users={users} {...pageProps} user={user} posts={posts} />
+      <Component setComments={setComments} setArrayOfPosts={setArrayOfPosts}  users={users} {...pageProps} user={user} posts={posts} />
     </Layout>
     </>
   )

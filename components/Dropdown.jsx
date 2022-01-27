@@ -41,7 +41,7 @@ export const Dropdown = (props) => {
                             type="submit"
                             className={
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block w-full text-left px-4 py-2 text-sm'
+                                'block w-full text-left px-4 py-2 text-sm '
                             }
                             >
                             Sign out
@@ -55,10 +55,11 @@ export const Dropdown = (props) => {
                 <Menu.Item key={index}> 
             {({ active }) => (
               <a
+                onClick={() => object.delete()}
                 href={object.url}
                 className={
-                  active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                  'block px-4 py-2 text-sm'
+                  active ? 'bg-gray-100 text-gray-900 cursor-pointer' : 'text-gray-700',
+                  'block px-4 py-2 text-sm cursor-pointer'
                 }
               >
                 {object.name}

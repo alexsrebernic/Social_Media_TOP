@@ -5,13 +5,19 @@ import PostLoad from './postLoad'
 import axios from 'axios';
 
 export const InputPost = ({user}) => {
+  const [isLoading,setIsLoading] = useState(false)
   const [inputValue,setInputValue] = useState("")
+  const [wait,setWait] = useState(false)
   const handleInput = (e) => {
     setInputValue(e.target.value)
   }
- 
+  
   const submitPost = async (e) => {
-        e.preventDefault()
+      e.preventDefault()
+      if(wait){
+        return  e.preventDefault()
+      } 
+      setIsLoading(true)
 
         const data = {
           content: inputValue,
@@ -29,6 +35,11 @@ export const InputPost = ({user}) => {
           });
           const result = request.data
           setInputValue("")
+          setIsLoading(false)
+          setWait(true)
+          setTimeout(() => {
+            setWait(false)
+          }, 5000);
         } catch(e){
           console.log(e)
         }
@@ -61,8 +72,21 @@ export const InputPost = ({user}) => {
         <Icon icon="bi:image-fill" color="#39a9e8" width="28px"/>
         <span className='ml-3'>Photo</span>
         </div>
-        <div>
-            <button type='submit' className='submit px-3 py-2 rounded'>Submit</button>
+        <div className='flex'>
+        <span id='error-message' className={wait?'mr-3 hidden pt-2 bg-red-400 text-white px-4 rounded defaultanimation':'hidden'}>{wait?"Please wait a moment":null}</span>
+
+              <button id='button-submit' type='submit' className='submit w-20 flex items-center justify-center h-10 rounded'>
+            {isLoading?(
+              <Icon  icon="gg:spinner" className='block animate-spin bg-red  ' width="15px" />
+              ):(
+                "Submit"
+                )}
+                
+              
+              </button>
+             
+
+
         </div>
         </div>
     </form>

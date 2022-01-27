@@ -248,6 +248,15 @@ ul .active {
   transition: 0.3s ease;
 }
 
+.submit-danger {
+  background-color: #e80505;
+  color: white;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
 .submit:hover {
   background-color: #212246;
 }

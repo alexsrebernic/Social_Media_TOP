@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import SideContainerProfile from '../components/SideContainerProfile';
 import Post from '../components/Post'
 import axios from 'axios';
+import InputPost from '../components/InputPost'
 export const profile = ({user}) => {
     const [isLoading,setIsLoading] = useState(true)
     const [userData,setUserData] = useState({})
@@ -17,10 +18,8 @@ export const profile = ({user}) => {
 
     },[user])
     const getPostsUser = async () => {
-        console.log(user._id)
         const requestPosts = await axios.get(`http://localhost:4000/api/user/get_posts/${user._id}`)
         const result = requestPosts.data.posts
-        console.log(result)
         setUserPosts(result.reverse())
     }
   return (
@@ -46,7 +45,7 @@ export const profile = ({user}) => {
                           <>
                               {userPosts.length?(
                                <>
-                                <Post posts={userPosts}/>
+                                <Post user={user} posts={userPosts}/>
                                </>
                               ):(
                             <div className='flex flex-col justify-center items-center my-6'>
