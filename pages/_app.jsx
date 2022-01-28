@@ -27,11 +27,14 @@ function MyApp({ Component, pageProps }) {
     })
     socket.on('comment:create',comment => {
       console.log(comment)
+      addComment(comment)
     })
   },[])
  
 
- 
+  const addComment = (comment) => {
+    setComments(comments => [comment,...comments])
+  }
   const addPost = (post) => { 
     setArrayOfPosts(posts => [post,...posts])
   }
@@ -71,7 +74,7 @@ function MyApp({ Component, pageProps }) {
   return(
     <>
     <Layout user={user}  >
-      <Component setComments={setComments} setArrayOfPosts={setArrayOfPosts}  users={users} {...pageProps} user={user} posts={posts} />
+      <Component comments={comments} setComments={setComments} setArrayOfPosts={setArrayOfPosts}  users={users} {...pageProps} user={user} posts={posts} />
     </Layout>
     </>
   )
