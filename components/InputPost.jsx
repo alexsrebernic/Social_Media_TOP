@@ -11,7 +11,11 @@ export const InputPost = ({user}) => {
   const handleInput = (e) => {
     setInputValue(e.target.value)
   }
-  
+  useEffect(() => {
+    return(() => {
+      setWait(false)
+    })
+  })
   const submitPost = async (e) => {
       e.preventDefault()
       if(wait){

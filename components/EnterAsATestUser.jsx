@@ -18,7 +18,7 @@ export const EnterAsATestUser = () => {
     
       const request = axios({
         method: 'post',
-        url: 'https://vast-citadel-97852.herokuapp.com/api/users/log_in',
+        url: 'http://localhost:4000/api/users/log_in',
         data,
         headers:{
           "Content-Type":"application/json"
@@ -44,7 +44,7 @@ export const EnterAsATestUser = () => {
         <button onClick={submitLogIn}  type="submit" className='submit rounded py-2 mt-3 flex justify-center items-center w-full' value={"Sign Up"} id='message-button-test'>
           <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin':"hidden"}  width="24px" />
           <span id='text-message-test'> 
-            Sign Up
+            Enter
           </span>
         </button>  </div>);
 };

@@ -38,7 +38,6 @@ export const Register = () => {
         },
       });
       const result = request
-      console.log(result.status)
       if(result.status === 201){
           setIsLoading(false)
           textMessage.textContent = "Done! please Log In"

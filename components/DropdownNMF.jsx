@@ -2,8 +2,18 @@ import React from 'react';
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { Icon } from '@iconify/react';
+import Avatar from 'react-avatar';
+import axios from 'axios';
 
 export const DropdownNMF = (props) => {
+  const updateNotification = (id) => {
+    try {
+      const request = axios.post(`http://localhost:4000/api/notification/${id}`)
+
+    } catch(e){
+      console.log(e)
+    }
+  }
   return (
     <Menu as="div" className="relative inline-block text-left">
     <div>
@@ -27,22 +37,61 @@ export const DropdownNMF = (props) => {
           <div className={props.items.length?"py-1 ":"py-1 h-full flex flex-col items-center justify-center text-bold"}>
         {props.items.length?(
             <>
-            {props.items.map((name,index) => {
-            return(
-                <Menu.Item key={index}> 
-            {({ active }) => (
-              <a
-                href="#"
-                className={
-                  active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                  'block px-4 h-16 text-sm py-2 border-b flex items-center'
-                }
-              >
-               <span>{name}</span>
-              </a>
-            )}
-          </Menu.Item>
-            )
+            {props.items.map((object,index) => {
+              if(object.comment){
+                return(
+                  <Menu.Item  onClick={() => {updateNotification(object._id)}} key={index}> 
+                      {({ active }) => (
+                        <div className={!(object.clicked)?"bg-gray-100":"bg-white "}>
+                        <a
+                          href={`/post/${object.post}`}
+                          className={
+                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                            'block px-4 h-16 text-sm py-2 border-b flex items-center'
+                          }
+                        >
+                        <Avatar name={object.author.full_name} color='gray' className='avatar'   size="40" round={true}/>
+                        <span className='ml-3'>{object.author.full_name} has commented in your post</span>
+                        <span className={!(object.clicked)?"ml-3 w-2 h-2 rounded-full bg-blue-500":"hidden"}></span>
+                        </a>
+                        </div>
+                      )}
+                  
+                  </Menu.Item>
+                ) 
+              }else if(object.like){
+                return(
+                  <Menu.Item key={index}> 
+                      {({ active }) => (
+                        <a
+                          href="#"
+                          className={
+                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                            'block px-4 h-16 text-sm py-2 border-b flex items-center'
+                          }
+                        >
+                        <span>{name}</span>
+                        </a>
+                      )}
+                  </Menu.Item>
+                )
+              } else if(object.friend_request){
+                return(
+                  <Menu.Item key={index}> 
+                      {({ active }) => (
+                        <a
+                          href="#"
+                          className={
+                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                            'block px-4 h-16 text-sm py-2 border-b flex items-center'
+                          }
+                        >
+                        <span>{name}</span>
+                        </a>
+                      )}
+                  </Menu.Item>
+                )
+              }
         })}
 
             </>

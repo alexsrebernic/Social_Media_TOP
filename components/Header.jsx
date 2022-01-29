@@ -25,9 +25,9 @@ const Header = ( {user,} ) => {
       <header className='flex w-full justify-between h-20  px-10 sticky'>
         <div className='flex items-center  justify-around w-3/5 '>
             <div className='logo'>
-                <Link href="/">
+                <a href="/">
                 <Icon icon="brandico:facebook-rect" className='cursor-pointer' color="#3a3b6a" width="40" />
-                </Link>
+                </a>
             </div>
             <div className='flex items-center mr-20 justify-between input-search w-3/4 h-10'> 
                     <SearchBox/>
@@ -59,9 +59,16 @@ const Header = ( {user,} ) => {
 
             </div>
             <div className='flex ml-5 interactions-header'>
-                <DropdownNMF name={<Icon icon="fa-brands:facebook-messenger" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} title="Messages" items={userData.chats}  noItemsMessage="You don't have any messages"/>
-                <DropdownNMF name={<Icon icon="ci:notification" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={userData.notifications} title="Notifications"  noItemsMessage="You dont have any notification"/>
-                <DropdownNMF name={<Icon icon="fa-solid:user-friends" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={userData.friends} title="Friends"  noItemsMessage="You dont have any friends :("/>
+               {userData.notifications && userData.friends && userData.chats?(
+                <>
+                    <DropdownNMF name={<Icon icon="fa-brands:facebook-messenger" className={'mx-2 cursor-pointer'} width="25px" color="#e8e8e8" />} title="Messages" items={userData.chats}  noItemsMessage="You don't have any messages"/>
+                    <DropdownNMF name={<Icon icon="ci:notification" className={userData.notifications.length?'mx-2 cursor-pointer':'mx-2 cursor-pointer'} width="25px" color="#e8e8e8" />} items={userData.notifications} title="Notifications"  noItemsMessage="You dont have any notification"/>
+                    <DropdownNMF name={<Icon icon="fa-solid:user-friends" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={userData.friends} title="Friends"  noItemsMessage="You dont have any friends :("/>
+                </>
+               )
+               :(
+                   null
+               )}
 
                
                 

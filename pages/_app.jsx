@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { io } from "socket.io-client";
+
+
 const hostSocket = 'localhost:3001'
 let socket = io(hostSocket)
 function MyApp({ Component, pageProps }) {
@@ -19,16 +21,21 @@ function MyApp({ Component, pageProps }) {
   const [users,setArrayOfUsers] = useState("")
   const [posts,setArrayOfPosts] = useState("")
   useEffect(() => {
-    socket.once('connect',(socket) => {
-      console.log("User connected")
-    })
+      socket.once('connect',(socket) => {
+        console.log("User connected")
+      })
+    
     socket.on('post:create',post => {
       addPost(post)
     })
+    socket.on('post:update',post => {
+      console.log(post)
+      updatePost(post)
+    })
     socket.on('comment:create',comment => {
-      console.log(comment)
       addComment(comment)
     })
+  
   },[])
  
 
@@ -38,6 +45,10 @@ function MyApp({ Component, pageProps }) {
   const addPost = (post) => { 
     setArrayOfPosts(posts => [post,...posts])
   }
+  const updatePost = (post) => {
+    setArrayOfPosts(oldPosts => oldPosts.map((oldPost) => {return oldPost._id === post._id?post:oldPost}))
+  }
+ 
   useEffect(() => {
     if(router.pathname !== "/sign_up_or_login" && user === ""){
       fetchData()
