@@ -4,24 +4,26 @@ import SideContainerProfile from '../components/SideContainerProfile';
 import Post from '../components/Post'
 import axios from 'axios';
 import InputPost from '../components/InputPost'
-export const profile = ({user}) => {
+export const profile = ({user,posts}) => {
+    console.log(posts)
     const [isLoading,setIsLoading] = useState(true)
     const [userData,setUserData] = useState({})
     const [userPosts,setUserPosts] = useState({})
     useEffect(() => {
         if(user !== ""){
-            getPostsUser()
             setIsLoading(false)
 
         }
         setUserData(user)
 
     },[user])
-    const getPostsUser = async () => {
-        const requestPosts = await axios.get(`http://localhost:4000/api/user/get_posts/${user._id}`)
-        const result = requestPosts.data.posts
-        setUserPosts(result.reverse())
-    }
+   
+    useEffect(() => {
+        if(posts !== ''){
+        setUserPosts(posts.filter(post => post.author._id === user._id))
+
+        }
+    },[posts])
   return (
   <div className=' w-full '>
     <div className='profile-container px-12 py-4 flex '>

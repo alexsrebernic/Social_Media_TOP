@@ -32,6 +32,10 @@ function MyApp({ Component, pageProps }) {
       console.log(post)
       updatePost(post)
     })
+    socket.on('user:update',user => {
+      console.log(user)
+      setCurrentUser(user)
+    })
     socket.on('comment:create',comment => {
       addComment(comment)
     })

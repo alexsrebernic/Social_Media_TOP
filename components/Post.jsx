@@ -8,22 +8,7 @@ import { useRouter } from 'next/router'
 
 export const Post = ({posts,user,setArrayOfPosts,id}) => {
     const router = useRouter()
-    const [isClickedLike,setIsClickedLike] = useState(false)
-    const [isClickedDislike,setIsClickedDislike] = useState(false)
-    const changeClickedLike = () => {
-        if(isClickedLike){
-            setIsClickedLike(false)
-        } else if(!(isClickedLike)){
-            setIsClickedLike(true)
-        }
-    }
-    const changeClickedDislike = () => {
-        if(isClickedLike){
-            setIsClickedDislike(false)
-        } else if(!(isClickedLike)){
-            setIsClickedDislike(true)
-        }
-    }
+  
     const deletePost = async (id) => {
         try {
         const request = await axios.post(`http://localhost:4000/api/posts/delete/${id}`)
@@ -155,16 +140,11 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
                                 <Icon icon="ant-design:like-filled" width="25px" onClick={() => {
                                     if(post.likes.indexOf(user._id) > -1){
                                         undoLike(post._id)
-
-                                        console.log("first option")
-
                                     } else if(post.dislikes.indexOf(user._id) > -1){
                                         undoDislike(post._id)
                                         createLike(post._id,post.author._id)
-                                        console.log("secondoption")
                                     } else {
                                         createLike(post._id,post.author._id)
-                                        console.log("thirdoption")
                                     }
 
                                 }} className={post.likes.indexOf(user._id) > -1?'text-blue-500 cursor-pointer':' cursor-pointer'}/>
@@ -173,7 +153,6 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
                                         <span className='mx-3 flex items-center'>
                                             <Icon icon="ant-design:dislike-filled" width="25px" onClick={() => {
                                                 if(post.dislikes.indexOf(user._id) > -1){
-                                                    console.log("first option")
                                                     undoDislike(post._id)                                       
                                                 } else if(post.likes.indexOf(user._id) > -1){
                                                     undoLike(post._id)
@@ -245,26 +224,22 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
                     <div >
                         <div className='flex border-t pt-3'>
                             <span className='mx-3 flex items-center'>
-                                <Icon icon="ant-design:like-filled" width="25px" onClick={() => {
+                                <Icon id="likebutton" className="defaultanimation" icon="ant-design:like-filled" width="25px" onClick={() => {
+                                
                                     if(post.likes.indexOf(user._id) > -1){
                                         undoLike(post._id)
-
-                                        console.log("first option")
-
                                     } else if(post.dislikes.indexOf(user._id) > -1){
                                         undoDislike(post._id)
                                         createLike(post._id,post.author._id)
-                                        console.log("secondoption")
                                     } else {
                                         createLike(post._id,post.author._id)
-                                        console.log("thirdoption")
                                     }
-
                                 }} className={post.likes.indexOf(user._id) > -1?'text-blue-500 cursor-pointer':' cursor-pointer'}/>
                                 <span className='ml-2'>{post.likes.length}</span>
                             </span>
                             <span className='mx-3 flex items-center'>
-                                <Icon icon="ant-design:dislike-filled" width="25px" onClick={() => {
+                                <Icon id="dislikebutton" className="defaultanimation" icon="ant-design:dislike-filled" width="25px" onClick={() => {
+                                 
                                     if(post.dislikes.indexOf(user._id) > -1){
                                         console.log("first option")
                                         undoDislike(post._id)                                       

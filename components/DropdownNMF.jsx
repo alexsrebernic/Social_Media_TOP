@@ -4,11 +4,42 @@ import { Menu, Transition } from '@headlessui/react'
 import { Icon } from '@iconify/react';
 import Avatar from 'react-avatar';
 import axios from 'axios';
+import Router, { useRouter } from 'next/router';
 
 export const DropdownNMF = (props) => {
+  
+  const acceptFriendRequest = async (idAuthor,idNotification) => {
+    try {
+      const data = {
+        author:idAuthor,
+        user:props.user,
+        idNotification,
+      }
+      const request = await axios({
+        method: 'post',
+        url: 'http://localhost:4000/api/notifications/accept_friend_request',
+        data,
+        headers:{
+          "Content-Type":"application/json"
+        },
+      })
+    } catch(e){
+      console.log(e)
+    }
+  
+  }
+  const refuseFriendRequest = (idNotification) => {
+    updateNotification(idNotification)
+
+  }
   const updateNotification = (id) => {
     try {
-      const request = axios.post(`http://localhost:4000/api/notification/${id}`)
+      const data = {
+        user:props.user
+      }
+      const request = axios.post(`http://localhost:4000/api/notification/${id}`,data).then(() => {
+        console.log("asd")
+      })
 
     } catch(e){
       console.log(e)
@@ -61,37 +92,72 @@ export const DropdownNMF = (props) => {
                 ) 
               }else if(object.like){
                 return(
-                  <Menu.Item key={index}> 
-                      {({ active }) => (
+                  <Menu.Item onClick={() => {updateNotification(object._id)}} key={index}> 
+                  {({ active }) => (
+                        <div className={!(object.clicked)?"bg-gray-100":"bg-white "}>
                         <a
-                          href="#"
+                          href={`/post/${object.post}`}
                           className={
                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                             'block px-4 h-16 text-sm py-2 border-b flex items-center'
                           }
                         >
-                        <span>{name}</span>
+                        <Avatar name={object.author.full_name} color='gray' className='avatar'   size="40" round={true}/>
+                        <span className='ml-3'>{object.author.full_name} has liked your post</span>
+                        <span className={!(object.clicked)?"ml-3 w-2 h-2 rounded-full bg-blue-500":"hidden"}></span>
                         </a>
+                        </div>
                       )}
                   </Menu.Item>
                 )
               } else if(object.friend_request){
+
                 return(
-                  <Menu.Item key={index}> 
-                      {({ active }) => (
-                        <a
-                          href="#"
+                  <Menu.Item  key={index}> 
+                  {({ active }) => (
+                        <div className={!(object.clicked)?"bg-gray-100":"bg-white "}>
+                        <div
                           className={
                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                             'block px-4 h-16 text-sm py-2 border-b flex items-center'
                           }
                         >
-                        <span>{name}</span>
-                        </a>
+                        <Avatar name={object.author.full_name} color='gray' className='avatar'   size="40" round={true}/>
+                        <span className='ml-3'>{object.author.full_name} has send you a friend request</span>
+                        <span className={!(object.clicked)?"block flex":"hidden"}>
+                        <button onClick={() =>{ acceptFriendRequest(object.author._id,object._id)}} className='mr-3'><Icon icon="charm:tick" width="25px" className='cursor-pointer' color="#74c667"/></button>
+                        <button onClick={() => refuseFriendRequest(object._id)}><Icon className='cursor-pointer' icon="bi:x" width="25px" color="#d64828" /></button>
+                        </span>
+                        </div>
+                        </div>
                       )}
                   </Menu.Item>
                 )
               }
+              return (
+                <Menu.Item   key={index}> 
+                      {({ active }) => (
+                        <div className="bg-white ">
+                        <a
+                          href={`/profile/${object._id}`}
+                          className={
+                            active ? 'bg-gray-100 text-gray-900 w-full' : 'text-gray-700',
+                            'block px-4 h-16 text-sm py-2 border-b flex items-center w-full flex justify-between'
+                          }
+                        >
+                        <span>
+                        <Avatar name={object.full_name} color='gray' className='avatar'   size="40" round={true}/>
+                        <span className='ml-3'>{object.full_name} </span>
+
+                        </span>
+                     
+                        <button className='submit py-2 px-1 rounded text-sm'>Send a message!</button>
+                        </a>
+                        </div>
+                      )}
+                  
+                  </Menu.Item>
+              )
         })}
 
             </>

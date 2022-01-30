@@ -187,9 +187,8 @@ ul {
     background-color: #f2f2f4;
     
     div {
-        background-color: white;
         transition: 0.3s ease;
-
+        border-radius: 50%;
     }
     div:hover {
         background-color: rgba($color: #c5c5c5, $alpha: 0.5);
@@ -264,4 +263,10 @@ ul {
 .notification {
     background-color: #3a3b6a;
 
+}
+.container-image-profile-visiter {
+    background-color: #f2f2f4;
+    span {
+        font-size: 60px;
+    }
 }

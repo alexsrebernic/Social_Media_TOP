@@ -13,7 +13,7 @@ export const EnterAsATestUser = () => {
     e.preventDefault()
   const data = {
     email:"testUser@gmail.com",
-      password:"12345"
+      password:"123"
   }
     
       const request = axios({

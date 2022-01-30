@@ -1,16 +1,26 @@
 import { Icon } from '@iconify/react';
 import React from 'react';
+import Avatar from 'react-avatar';
 
 export const SideContainerProfile = ({isLoading,userData}) => {
   return (
     <div className='w-1/4 border shadow-md rounded side-container-profile bg-white'>
-    <div className='h-96 flex items-center justify-center border-b container-image-profile' >
-        <div className='border w-72 h-72 rounded-full shadow flex justify-center items-center'>
-        <Icon icon="bx:bx-image-alt" className='hidden' width="40px"/>
+        <div className='h-96 flex items-center justify-center border-b container-image-profile' >
+            <div className='border w-72 h-72 rounded-full shadow flex justify-center items-center'>
+            {userData.profile_img?(
+                null
+            ):(
+                <Avatar name={userData.full_name} color='gray' className='avatar' className="text-2xl"   size="288" round={true}/>
+
+            )}        
+            </div>
         </div>
-    </div>
+
+     
+   
     <div className='mt-8 px-8 border-b pb-6'>
-        <div className=''>
+            <>  
+            <div className=''>
             <h1 className='text-2xl border-b flex items-center'>About me: 
             <Icon icon="ant-design:edit-filled" className='cursor-pointer hover:text-gray-300 ml-4'  width="25px" />
             
@@ -38,6 +48,10 @@ export const SideContainerProfile = ({isLoading,userData}) => {
 
             </ul>
         </div>
+            
+            </>
+  
+      
     </div>
     <div className='mt-8 px-8 border-b pb-6'>
         <div className='flex'>
@@ -57,17 +71,25 @@ export const SideContainerProfile = ({isLoading,userData}) => {
             </div>
         ):(
             <>
+           
             {userData.friends.length?(
             <div className='grid grid-cols-3 grid-rows-3 mt-2'>
-                <div className='w-24 h-24 border mb-2 shadow'></div>
-                <div className='w-24 h-24 border shadow'></div>
-                <div className='w-24 h-24 border shadow'></div>
-                <div className='w-24 h-24 border shadow'></div>
-                <div className='w-24 h-24 border shadow'></div>
-                <div className='w-24 h-24 border shadow'></div>
-                <div className='w-24 h-24 border shadow'></div>
-                <div className='w-24 h-24 border shadow'></div>
-                <div className='w-24 h-24 border shadow'></div>
+                {userData.friends.map((friend,index) => {
+                    return (
+                <div key={index} className='w-24 h-24 border mb-2 shadow'>
+                        <a href={`/profile/${friend._id}`}>
+                        {friend.profile_img?(
+                            null
+                        ):(
+                            <Avatar name={friend.full_name} color='gray' className='avatar' className="text-2xl"   size="100" />
+
+                        )}
+                        </a>
+                </div>
+                        
+                    )
+                })}
+               
             </div>
             ):(
                 <div className='flex flex-col my-5 justify-center items-center justify-center'>

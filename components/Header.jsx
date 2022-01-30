@@ -6,15 +6,16 @@ import DropdownNMF from './DropdownNMF'
 import SearchBox from './SearchBox'
 import Avatar from 'react-avatar';
 const Header = ( {user,} ) => {
+    
     const [isLoading,setIsLoading] = useState(true)
     const [userData,setUserData] = useState({})
     useEffect(() => {
         if(user !== ""){
             setIsLoading(false)
-        }
         setUserData(user)
+
+        }
     },[user])
- 
     const itemsProfile = [
         {name:"Profile",url:"/profile"},
         {name:"Settings",url:"/settings"},
@@ -62,7 +63,7 @@ const Header = ( {user,} ) => {
                {userData.notifications && userData.friends && userData.chats?(
                 <>
                     <DropdownNMF name={<Icon icon="fa-brands:facebook-messenger" className={'mx-2 cursor-pointer'} width="25px" color="#e8e8e8" />} title="Messages" items={userData.chats}  noItemsMessage="You don't have any messages"/>
-                    <DropdownNMF name={<Icon icon="ci:notification" className={userData.notifications.length?'mx-2 cursor-pointer':'mx-2 cursor-pointer'} width="25px" color="#e8e8e8" />} items={userData.notifications} title="Notifications"  noItemsMessage="You dont have any notification"/>
+                    <DropdownNMF name={<Icon icon="ci:notification"  width="25px" color="#e8e8e8" />} user={user._id} items={userData.notifications} title="Notifications"  noItemsMessage="You dont have any notification"/>
                     <DropdownNMF name={<Icon icon="fa-solid:user-friends" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={userData.friends} title="Friends"  noItemsMessage="You dont have any friends :("/>
                 </>
                )

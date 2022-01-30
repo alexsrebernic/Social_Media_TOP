@@ -204,9 +204,9 @@ ul .active {
 }
 
 .container-image-profile div {
-  background-color: white;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+  border-radius: 50%;
 }
 
 .container-image-profile div:hover {
@@ -297,5 +297,17 @@ ul .active {
   max-height: -webkit-fit-content;
   max-height: -moz-fit-content;
   max-height: fit-content;
+}
+
+.notification {
+  background-color: #3a3b6a;
+}
+
+.container-image-profile-visiter {
+  background-color: #f2f2f4;
+}
+
+.container-image-profile-visiter span {
+  font-size: 60px;
 }
 /*# sourceMappingURL=globals.css.map */
