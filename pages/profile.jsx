@@ -4,8 +4,7 @@ import SideContainerProfile from '../components/SideContainerProfile';
 import Post from '../components/Post'
 import axios from 'axios';
 import InputPost from '../components/InputPost'
-export const profile = ({user,posts}) => {
-    console.log(posts)
+export const profile = ({user,posts,setArrayOfPosts}) => {
     const [isLoading,setIsLoading] = useState(true)
     const [userData,setUserData] = useState({})
     const [userPosts,setUserPosts] = useState({})
@@ -47,7 +46,7 @@ export const profile = ({user,posts}) => {
                           <>
                               {userPosts.length?(
                                <>
-                                <Post user={user} posts={userPosts}/>
+                                <Post setArrayOfPosts={setArrayOfPosts} user={user} posts={userPosts}/>
                                </>
                               ):(
                             <div className='flex flex-col justify-center items-center my-6'>

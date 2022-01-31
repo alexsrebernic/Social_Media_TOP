@@ -5,7 +5,7 @@ import Dropdown from './Dropdown';
 import DropdownNMF from './DropdownNMF'
 import SearchBox from './SearchBox'
 import Avatar from 'react-avatar';
-const Header = ( {user,} ) => {
+const Header = ( {user,users} ) => {
     
     const [isLoading,setIsLoading] = useState(true)
     const [userData,setUserData] = useState({})
@@ -31,7 +31,7 @@ const Header = ( {user,} ) => {
                 </a>
             </div>
             <div className='flex items-center mr-20 justify-between input-search w-3/4 h-10'> 
-                    <SearchBox/>
+                    <SearchBox users={users}/>
                     <Icon icon="entypo:magnifying-glass" width="28px" color="#bdbcbf"  />
             </div>
         </div>
@@ -60,9 +60,8 @@ const Header = ( {user,} ) => {
 
             </div>
             <div className='flex ml-5 interactions-header'>
-               {userData.notifications && userData.friends && userData.chats?(
+               {userData.notifications && userData.friends?(
                 <>
-                    <DropdownNMF name={<Icon icon="fa-brands:facebook-messenger" className={'mx-2 cursor-pointer'} width="25px" color="#e8e8e8" />} title="Messages" items={userData.chats}  noItemsMessage="You don't have any messages"/>
                     <DropdownNMF name={<Icon icon="ci:notification"  width="25px" color="#e8e8e8" />} user={user._id} items={userData.notifications} title="Notifications"  noItemsMessage="You dont have any notification"/>
                     <DropdownNMF name={<Icon icon="fa-solid:user-friends" className='mx-2 cursor-pointer' width="25px" color="#e8e8e8" />} items={userData.friends} title="Friends"  noItemsMessage="You dont have any friends :("/>
                 </>

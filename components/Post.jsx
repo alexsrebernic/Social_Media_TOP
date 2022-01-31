@@ -14,7 +14,9 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
         const request = await axios.post(`http://localhost:4000/api/posts/delete/${id}`)
         const newArray = posts.filter(post => post._id !== id)
         setArrayOfPosts(newArray)
-        router.push('/')
+        if(router.pathname !== '/profile'){
+            router.push('/')
+        }
         } catch(err){
             console.log(err)
         }

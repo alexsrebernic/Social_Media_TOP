@@ -2,8 +2,16 @@ import React from 'react';
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { Icon } from '@iconify/react';
+import { useRouter } from 'next/router';
 
 export const Dropdown = (props) => {
+       const router = useRouter()
+  const signOutUser = () => {
+     if(localStorage.getItem('token')){
+       localStorage.removeItem('token')
+      router.push('/sign_up_or_login')
+      }
+   }
   return (
     <Menu as="div" className="relative inline-block text-left">
     <div>
@@ -34,11 +42,9 @@ export const Dropdown = (props) => {
         {props.items.map((object,index) => {
             if(object.name === "Sign Out"){
                 return (
-                    <form key={index} method="POST" action="#">
-                        <Menu.Item >
+                        <Menu.Item onClick={signOutUser}>
                         {({ active }) => (
                             <button
-                            type="submit"
                             className={
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                 'block w-full text-left px-4 py-2 text-sm '
@@ -48,7 +54,6 @@ export const Dropdown = (props) => {
                             </button>
                         )}
                         </Menu.Item>
-                    </form>
                 )
             }
             return(

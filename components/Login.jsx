@@ -36,11 +36,11 @@ export const Login = () => {
         }
       } catch (e){
         setIsLoading(false)
-        spanMessage.value = e.response.data.message
+        spanMessage.textContent = e.response.data.message
         errorMessage.style.backgroundColor = "red"
         errorMessage.style.pointerEvents = "none"
         setTimeout(() => {
-          spanMessage.value = "Log In"
+          spanMessage.textContent = "Log In"
         errorMessage.style.pointerEvents = "all"
         errorMessage.style.backgroundColor = "#3a3b6a"
 

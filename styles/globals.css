@@ -180,6 +180,7 @@ ul .active {
 
 .container-messages-chat {
   background-color: #f2f2f4;
+  max-height: 655px;
 }
 
 .send-message-button {
@@ -309,5 +310,14 @@ ul .active {
 
 .container-image-profile-visiter span {
   font-size: 60px;
+}
+
+.top-chat-user {
+  height: 49px;
+}
+
+.top-chat-user div {
+  -webkit-transform: translate(0px, -2px);
+          transform: translate(0px, -2px);
 }
 /*# sourceMappingURL=globals.css.map */

@@ -1,14 +1,28 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import React from 'react';
+import Avatar from 'react-avatar';
 
-export const SearchBox = () => {
+export const SearchBox = ({users}) => {
     const [isOpen,setSearchBox] = useState(false)
-    const items = []
-  return (
+    const [inputValue,setInputValue] = useState("")
+    const [filteredUsers,setFilterUsers] = useState([])
+    const handleInput = (e) => {
+      setInputValue(e.target.value)
+  }
+  useEffect(() => {
+    if(users !== ''){
+    if(inputValue === '')return setFilterUsers([])
+    setFilterUsers(users.filter(user => user.full_name.includes(inputValue)))
+
+    }
+  },[inputValue])
+    return (
+    <Menu as="div" className="w-full" >
+
     <div  className="relative w-full inline-block text-left">
-    <div>
-      <input onClick={() => setSearchBox((isShowing) => !isShowing)} id='search-input' type="text" placeholder='Search' className='p-2 w-full ' aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-300"/>
+    <div className='w-full'>
+      <input onClick={() => setSearchBox((isShowing) => !isShowing)} onChange={(e) => handleInput(e)} id='search-input' type="text" placeholder='Search' className='p-2 w-full ' aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-300"/>
     </div>
 
     <Transition
@@ -22,21 +36,22 @@ export const SearchBox = () => {
       leaveTo="transform opacity-0 scale-95"
     >
       <div id='box-search-query' className="block origin-top-right overflow-y-auto  over absolute right-120 mt-2 container-query-box h-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-        <div className={items.length?"py-1 ":"py-1 h-full flex flex-col items-center justify-center text-bold"}>
-        {items.length?(
+        <div className={filteredUsers.length?"py-1 ":"py-1 h-full flex flex-col items-center justify-center text-bold"}>
+        {filteredUsers.length?(
             <>
-            {props.items.map((name,index) => {
+            {filteredUsers.map((object,index) => {
             return(
                 <Menu.Item key={index}> 
             {({ active }) => (
               <a
-                href="#"
+                href={`/profile/${object._id}`}
                 className={
                   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                   'block px-4 h-16 text-sm py-2 border-b flex items-center'
                 }
               >
-               <span>{name}</span>
+                <Avatar name={object.full_name} color='gray' className='avatar'   size="40" round={true}/>
+               <span className='ml-2'>{object.full_name}</span>
               </a>
             )}
           </Menu.Item>
@@ -51,6 +66,8 @@ export const SearchBox = () => {
       </div>
     </Transition>
   </div>
+  </Menu>
+
   );
 };
 export default SearchBox

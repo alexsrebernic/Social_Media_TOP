@@ -20,11 +20,12 @@ function MyApp({ Component, pageProps }) {
   const [user,setCurrentUser] = useState("")
   const [users,setArrayOfUsers] = useState("")
   const [posts,setArrayOfPosts] = useState("")
+  const [userChats,setArrayOfUserChats] = useState('')
   useEffect(() => {
       socket.once('connect',(socket) => {
         console.log("User connected")
       })
-    
+      console.log(user)
     socket.on('post:create',post => {
       addPost(post)
     })
@@ -33,16 +34,34 @@ function MyApp({ Component, pageProps }) {
       updatePost(post)
     })
     socket.on('user:update',user => {
+        socket.emit('user:update',user)
+    })
+    socket.on('user:update:response',user => {
       console.log(user)
       setCurrentUser(user)
     })
     socket.on('comment:create',comment => {
       addComment(comment)
     })
-  
+    socket.on('chat:update',chat => {
+      socket.emit("chat:update",chat)
+    })
+    socket.on('chat:update:response',chat => {
+      console.log(chat)
+      updateChat(chat)
+    })
+    socket.on('chat:create',chat => {
+      console.log(chat)
+      socket.emit('chat:create',chat)
+    })
+    socket.on("chat:create:response",chat => {
+      addChat(chat)
+    })
   },[])
  
-
+  const addChat = (chat) => {
+    setArrayOfUserChats(oldArray => [chat,...oldArray])
+   }
   const addComment = (comment) => {
     setComments(comments => [comment,...comments])
   }
@@ -52,7 +71,10 @@ function MyApp({ Component, pageProps }) {
   const updatePost = (post) => {
     setArrayOfPosts(oldPosts => oldPosts.map((oldPost) => {return oldPost._id === post._id?post:oldPost}))
   }
- 
+  const updateChat = (chat) => {
+    console.log(chat)
+    setArrayOfUserChats(oldChats => oldChats.map(oldChat => {return oldChat._id === chat._id?chat:oldChat}))
+  }
   useEffect(() => {
     if(router.pathname !== "/sign_up_or_login" && user === ""){
       fetchData()
@@ -69,17 +91,25 @@ function MyApp({ Component, pageProps }) {
             axios.get(`http://localhost:4000/api/posts/`)
           ]).then(axios.spread((user,users,posts) => {
             setCurrentUser(user.data)
+            setArrayOfUserChats(user.data.chats)
             setArrayOfUsers(users.data.users)
             setArrayOfPosts(posts.data)
+            socket.emit('online',user.data)
           }))
         })
        
       } catch(e){
         console.log(e)
+
       }
-   
+
   }
- 
+  useEffect(() => {
+    if(!(localStorage.getItem("token"))){
+
+        router.push('/sign_up_or_login')
+    }
+  },[])
   if(Component.name === "SignUpOrLogin"){
     return(
       <Component {...pageProps}/>
@@ -88,8 +118,8 @@ function MyApp({ Component, pageProps }) {
 
   return(
     <>
-    <Layout user={user}  >
-      <Component comments={comments} setComments={setComments} setArrayOfPosts={setArrayOfPosts}  users={users} {...pageProps} user={user} posts={posts} />
+    <Layout user={user}  users={users}>
+      <Component userChats={userChats} comments={comments} setComments={setComments} setArrayOfPosts={setArrayOfPosts}  users={users} {...pageProps} user={user} posts={posts} />
     </Layout>
     </>
   )

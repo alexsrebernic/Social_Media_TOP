@@ -1,8 +1,121 @@
 import { Icon } from '@iconify/react';
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from 'react-avatar';
-
+import axios from 'axios';
 export const SideContainerProfile = ({isLoading,userData}) => {
+    const [aboutMeInputDisplay,setAboutMeDisplay] = useState(false)
+    const [genderInputDisplay,setGenderInputDisplay] = useState(false)
+    const [locationInputDisplay,setLocationInputDisplay] = useState(false)
+    const [dateOfBirthInputDisplay,setDateOfBirthInputDisplay] = useState(false)
+    const displayAboutMeInput = () => {
+        if(aboutMeInputDisplay){
+            setAboutMeDisplay(false)
+        } else {
+            setAboutMeDisplay(true)
+        }
+    }
+    const displayGenderInput = () => {
+        if(genderInputDisplay){
+            setGenderInputDisplay(false)
+        } else {
+            setGenderInputDisplay(true)
+        }
+    }
+    const displayLocationInput = () => {
+        if(locationInputDisplay){
+            setLocationInputDisplay(false)
+        } else {
+            setLocationInputDisplay(true)
+        }
+    }
+    const displayDateOfBirthInput = () => {
+        if(dateOfBirthInputDisplay){
+            setDateOfBirthInputDisplay(false)
+        } else {
+            setDateOfBirthInputDisplay(true)
+        }
+    }
+    const updateAboutMe = async () => {
+        try{
+            const textAboutMe = document.getElementById("input-aboutme").value
+            const data = {
+                text:textAboutMe,
+                user:userData._id
+            }
+            const request = await axios({
+                method: 'post',
+                url: 'http://localhost:4000/api/user/update_aboutme',
+                data,
+                headers:{
+                  "Content-Type":"application/json"
+                },
+              });
+              setAboutMeDisplay(false)
+        } catch(e){
+            console.log(e)
+        }
+     
+    }
+    const updateGender = async () => {
+        try{
+            const genderValue = document.getElementById("gender-options-profile").value
+            const data = {
+                gender:genderValue,
+                user:userData._id
+            }
+            const request = await axios({
+                method: 'post',
+                url: 'http://localhost:4000/api/user/update_gender',
+                data,
+                headers:{
+                  "Content-Type":"application/json"
+                },
+              });
+              setGenderInputDisplay(false)
+        } catch(e){
+
+        }
+    }
+    const updateLocation = async () => {
+        try{
+            const locationValue = document.getElementById("location-input").value
+            const data = {
+                location:locationValue,
+                user:userData._id
+            }
+            const request = await axios({
+                method: 'post',
+                url: 'http://localhost:4000/api/user/update_location',
+                data,
+                headers:{
+                  "Content-Type":"application/json"
+                },
+              });
+              setLocationInputDisplay(false)
+        } catch(e){
+
+        }
+    }
+    const updateDateOfBirth = async () => {
+        try{
+            const dateOfBirthValue = document.getElementById("date-input-profile").value
+            const data = {
+                date:dateOfBirthValue,
+                user:userData._id
+            }
+            const request = await axios({
+                method: 'post',
+                url: 'http://localhost:4000/api/user/update_date_of_birth',
+                data,
+                headers:{
+                  "Content-Type":"application/json"
+                },
+              });
+              setDateOfBirthInputDisplay(false)
+        } catch(e){
+
+        }
+    }
   return (
     <div className='w-1/4 border shadow-md rounded side-container-profile bg-white'>
         <div className='h-96 flex items-center justify-center border-b container-image-profile' >
@@ -22,9 +135,16 @@ export const SideContainerProfile = ({isLoading,userData}) => {
             <>  
             <div className=''>
             <h1 className='text-2xl border-b flex items-center'>About me: 
-            <Icon icon="ant-design:edit-filled" className='cursor-pointer hover:text-gray-300 ml-4'  width="25px" />
-            
+            <Icon icon="ant-design:edit-filled" className='cursor-pointer hover:text-gray-300 ml-4' onClick={displayAboutMeInput}  width="25px" />
+                
             </h1>
+            <div className={aboutMeInputDisplay?"hidden":"block"}>
+                {userData.about_me}
+            </div>
+            <div className={aboutMeInputDisplay?"block":"hidden"}>
+                    <textarea name="input-aboutme" id="input-aboutme" cols="30" rows="7" className='border mt-2'></textarea>
+                    <button onClick={updateAboutMe} className='submit px-2 py-1 rounded'>Submit</button>
+                </div>
         </div>
         <div>
             <span className=''>
@@ -33,18 +153,55 @@ export const SideContainerProfile = ({isLoading,userData}) => {
         </div>
         <div className='mt-4'>
             <ul>
-                <li className='py-1 flex items-center justify-between'><span>Gender:
-                <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red':"hidden"}  width="15px" />
-                
-                <span>{userData.gender}</span></span> <Icon icon="ant-design:edit-filled" className='cursor-pointer  hover:text-gray-300 ' width="25px" /></li>
                 <li className='py-1 flex items-center justify-between'>
-                <span>Location/City: 
-                <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red':"hidden"}  width="15px" />
-                <span></span> </span> <Icon icon="ant-design:edit-filled" className='cursor-pointer hover:text-gray-300 ' width="25px" /></li>
+                    <span>Gender:
+                        <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red':"hidden"}  width="15px" />
+                        {genderInputDisplay?(
+                            <>
+                                <select className='ml-2' name="" id="gender-options-profile">
+                                    <option value="Male">Male</option>
+                                    <option value="Women">Women</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <button onClick={updateGender} className='submit ml-2 px-1 rounded'>Submit</button>
+                            </>
+                        ):(
+                        <span className='ml-1'>{userData.gender}</span>
+
+                        )}
+                        </span> 
+                        <Icon icon="ant-design:edit-filled" className='cursor-pointer  hover:text-gray-300 ' onClick={displayGenderInput} width="25px" />
+                </li>
                 <li className='py-1 flex items-center justify-between'>
-                <span>Date of Birth:
-                <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red':"hidden"}  width="15px" />
-                <span >{userData.date_of_birth}</span> </span> <Icon icon="ant-design:edit-filled" className='cursor-pointer hover:text-gray-300 '  width="25px" /></li>
+                    <span>Location/City: 
+                        <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red':"hidden"}  width="15px" />
+                        {locationInputDisplay?(
+                            <>
+                            <input id='location-input' className='border rounded' type="text" />
+                            <button onClick={updateLocation} className='submit ml-2 px-1 rounded'>Submit</button>
+                            </>
+                        ):(
+                        <span className='ml-1'>{userData.location}</span> 
+
+                        )}
+                    </span> 
+                    <Icon icon="ant-design:edit-filled" className='cursor-pointer hover:text-gray-300 ' onClick={displayLocationInput} width="25px" />
+                </li>
+                <li className='py-1 flex items-center justify-between'>
+                    <span>Date of Birth:
+                        <Icon  icon="gg:spinner" className={isLoading? 'block animate-spin bg-red':"hidden"}  width="15px" />
+                        {dateOfBirthInputDisplay?(
+                            <>
+                                <input id='date-input-profile' type="date" />
+                                <button onClick={updateDateOfBirth} className='submit px-1 rounded' >Submit</button>
+                            </>
+                        ):(
+                        <span className='ml-1'>{userData.date_of_birth}</span> 
+
+                        )}
+                    </span> 
+                <Icon onClick={displayDateOfBirthInput} icon="ant-design:edit-filled" className='cursor-pointer hover:text-gray-300 '  width="25px" />
+                </li>
 
             </ul>
         </div>
