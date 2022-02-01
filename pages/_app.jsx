@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 
 
 const hostSocket = 'http://localhost:4000'
-let socket = io(hostSocket)
+let socket = io(hostSocket,{transports: ['websocket'],upgrade:false})
 function MyApp({ Component, pageProps }) {
  
   if (typeof window !== 'undefined') {
