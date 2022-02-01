@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { io } from "socket.io-client";
 
 
-const hostSocket = 'localhost:3001'
+const hostSocket = 'localhost:4000'
 let socket = io(hostSocket)
 function MyApp({ Component, pageProps }) {
  
@@ -25,19 +25,16 @@ function MyApp({ Component, pageProps }) {
       socket.once('connect',(socket) => {
         console.log("User connected")
       })
-      console.log(user)
-    socket.on('post:create',post => {
+      socket.on('post:create',post => {
       addPost(post)
     })
     socket.on('post:update',post => {
-      console.log(post)
       updatePost(post)
     })
     socket.on('user:update',user => {
-        socket.emit('user:update',user)
+      socket.emit('user:update',user)
     })
     socket.on('user:update:response',user => {
-      console.log(user)
       setCurrentUser(user)
     })
     socket.on('comment:create',comment => {
@@ -47,11 +44,9 @@ function MyApp({ Component, pageProps }) {
       socket.emit("chat:update",chat)
     })
     socket.on('chat:update:response',chat => {
-      console.log(chat)
       updateChat(chat)
     })
     socket.on('chat:create',chat => {
-      console.log(chat)
       socket.emit('chat:create',chat)
     })
     socket.on("chat:create:response",chat => {
@@ -72,7 +67,6 @@ function MyApp({ Component, pageProps }) {
     setArrayOfPosts(oldPosts => oldPosts.map((oldPost) => {return oldPost._id === post._id?post:oldPost}))
   }
   const updateChat = (chat) => {
-    console.log(chat)
     setArrayOfUserChats(oldChats => oldChats.map(oldChat => {return oldChat._id === chat._id?chat:oldChat}))
   }
   useEffect(() => {
