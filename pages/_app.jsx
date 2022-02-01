@@ -76,7 +76,8 @@ function MyApp({ Component, pageProps }) {
     setArrayOfUserChats(oldChats => oldChats.map(oldChat => {return oldChat._id === chat._id?chat:oldChat}))
   }
   useEffect(() => {
-    if(router.pathname !== "/sign_up_or_login" && user === ""){
+    if(router.pathname !== "/sign_up_or_login" && user === "" && localStorage.getItem('token')){
+      console.log("request data")
       fetchData()
     } 
    },[router.pathname])
@@ -90,6 +91,7 @@ function MyApp({ Component, pageProps }) {
             axios.get('http://localhost:4000/api/users/'),
             axios.get(`http://localhost:4000/api/posts/`)
           ]).then(axios.spread((user,users,posts) => {
+            console.log("requesting data")
             setCurrentUser(user.data)
             setArrayOfUserChats(user.data.chats)
             setArrayOfUsers(users.data.users)
@@ -106,16 +108,15 @@ function MyApp({ Component, pageProps }) {
   }
   useEffect(() => {
     if(!(localStorage.getItem("token"))){
-
+      console.log("No token")
         router.push('/sign_up_or_login')
     }
   },[])
-  if(Component.name === "SignUpOrLogin"){
+  if(router.pathname === "/sign_up_or_login"){
     return(
       <Component {...pageProps}/>
       )
   }
-
   return(
     <>
     <Layout user={user}  users={users}>
