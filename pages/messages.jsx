@@ -6,7 +6,6 @@ export const messages = ({user,userChats}) => {
     const [userChatId,setUserChatId] = useState('')
     const [chat,setChat] = useState('')
     useEffect(() => {
-        console.log(userChats)
         if(userChats !== ''){
             setChat(userChats.filter(chat => {
                 if(chat.user1 === userChatId || 
@@ -17,7 +16,6 @@ export const messages = ({user,userChats}) => {
         }
        
     },[userChatId,userChats])
-    console.log(chat)
     const sendMessage = async () => {
         if(userChatId === '') return
         const messageValue = document.getElementById("input-message").value

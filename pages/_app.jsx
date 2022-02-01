@@ -44,12 +44,14 @@ function MyApp({ Component, pageProps }) {
       socket.emit("chat:update",chat)
     })
     socket.on('chat:update:response',chat => {
+      console.log(chat)
       updateChat(chat)
     })
     socket.on('chat:create',chat => {
       socket.emit('chat:create',chat)
     })
     socket.on("chat:create:response",chat => {
+      console.log(chat)
       addChat(chat)
     })
   },[])
