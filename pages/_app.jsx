@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { io } from "socket.io-client";
 
 
-const hostSocket = 'localhost:4000'
+const hostSocket = 'http://localhost:4000'
 let socket = io(hostSocket)
 function MyApp({ Component, pageProps }) {
  
