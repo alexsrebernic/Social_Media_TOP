@@ -28,7 +28,7 @@ export const messages = ({user,userChats}) => {
             }
             const request = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/api/message/send',
+                url: 'https://vast-citadel-97852.herokuapp.com/api/message/send',
                 data,
                 headers:{
                   "Content-Type":"application/json"

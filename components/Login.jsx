@@ -21,7 +21,7 @@ export const Login = () => {
       try {
         const request = axios({
           method: 'post',
-          url: 'http://localhost:4000/api/users/log_in',
+          url: 'https://vast-citadel-97852.herokuapp.com/api/users/log_in',
           data,
           headers:{
             "Content-Type":"application/json"

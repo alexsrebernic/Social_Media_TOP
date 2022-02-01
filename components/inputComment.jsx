@@ -32,7 +32,7 @@ const InputComment = ({user,idPost,post}) => {
           try {
             const request = await axios({
               method: 'post',
-              url: 'http://localhost:4000/api/comments',
+              url: 'https://vast-citadel-97852.herokuapp.com/api/comments',
               data,
               headers:{
                 "Content-Type":"application/json"

@@ -11,7 +11,7 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
   
     const deletePost = async (id) => {
         try {
-        const request = await axios.post(`http://localhost:4000/api/posts/delete/${id}`)
+        const request = await axios.post(`https://vast-citadel-97852.herokuapp.com/api/posts/delete/${id}`)
         const newArray = posts.filter(post => post._id !== id)
         setArrayOfPosts(newArray)
         if(router.pathname !== '/profile'){
@@ -28,7 +28,7 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
         try{
             const request = await axios({
                 method: 'post',
-                url: `http://localhost:4000/api/post/like/${id}/${creator_of_post}`,
+                url: `https://vast-citadel-97852.herokuapp.com/api/post/like/${id}/${creator_of_post}`,
                 data,
                 headers:{
                   "Content-Type":"application/json"
@@ -45,7 +45,7 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
         try{
             const request = await axios({
                 method: 'post',
-                url: `http://localhost:4000/api/post/dislike/${id}`,
+                url: `https://vast-citadel-97852.herokuapp.com/api/post/dislike/${id}`,
                 data,
                 headers:{
                   "Content-Type":"application/json"
@@ -60,7 +60,7 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
             const data = {author:user._id}
             const request = await axios({
                 method: 'post',
-                url: `http://localhost:4000/api/post/undolike/${id}`,
+                url: `https://vast-citadel-97852.herokuapp.com/api/post/undolike/${id}`,
                 data,
                 headers:{
                   "Content-Type":"application/json"
@@ -76,7 +76,7 @@ export const Post = ({posts,user,setArrayOfPosts,id}) => {
 
             const request = await axios({
                 method: 'post',
-                url: `http://localhost:4000/api/post/undodislike/${id}`,
+                url: `https://vast-citadel-97852.herokuapp.com/api/post/undodislike/${id}`,
                 data,
                 headers:{
                   "Content-Type":"application/json"

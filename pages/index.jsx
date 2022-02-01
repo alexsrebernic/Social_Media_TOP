@@ -16,7 +16,7 @@ export default function Home({user,posts,users,setArrayOfPosts}) {
   const paginatePost = async (e) => {
     setIsLoading(true)
     try {
-      const request =await axios.get(`http://localhost:4000/api/posts/${page}`)
+      const request =await axios.get(`https://vast-citadel-97852.herokuapp.com/api/posts/${page}`)
       const result = request.data.result
       setIsLoading(false)
       if(result.length > 0){

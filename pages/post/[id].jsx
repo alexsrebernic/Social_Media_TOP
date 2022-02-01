@@ -17,7 +17,7 @@ const commentPage = ({user,setArrayOfPosts,setComments,comments,posts}) => {
     },[id])
     const getPost = async () => {
         try{
-            const request = await axios.get(`http://localhost:4000/api/post/${id}`)
+            const request = await axios.get(`https://vast-citadel-97852.herokuapp.com/api/post/${id}`)
             const postResponse = request.data.post
             const commentsResponse = request.data.comments
             if(request.status === 200){

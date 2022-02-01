@@ -31,7 +31,7 @@ export const Register = () => {
     try {
       const request = await axios({
         method: 'post',
-        url: 'http://localhost:4000/api/users/sign_up',
+        url: 'https://vast-citadel-97852.herokuapp.com/api/users/sign_up',
         data,
         headers:{
           "Content-Type":"application/json"

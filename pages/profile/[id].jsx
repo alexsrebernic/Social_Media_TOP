@@ -28,7 +28,7 @@ export const profilePage = ({user,posts}) => {
     const getUser = async () => {
         try{
 
-            const requestUser = await axios.get(`http://localhost:4000/api/users/${id}`)
+            const requestUser = await axios.get(`https://vast-citadel-97852.herokuapp.com/api/users/${id}`)
             const result = requestUser.data
             setUserPosts(result.posts)
             setUserData(result)
@@ -47,7 +47,7 @@ export const profilePage = ({user,posts}) => {
           console.log(data)
           const request = await axios({
             method: 'post',
-            url: 'http://localhost:4000/api/notifications/send_friend_request',
+            url: 'https://vast-citadel-97852.herokuapp.com/api/notifications/send_friend_request',
             data,
             headers:{
               "Content-Type":"application/json"

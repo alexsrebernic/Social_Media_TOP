@@ -13,7 +13,7 @@ const all_users = ({users,user}) => {
           console.log(data)
           const request = await axios({
             method: 'post',
-            url: 'http://localhost:4000/api/notifications/send_friend_request',
+            url: 'https://vast-citadel-97852.herokuapp.com/api/notifications/send_friend_request',
             data,
             headers:{
               "Content-Type":"application/json"

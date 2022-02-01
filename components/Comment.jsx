@@ -8,7 +8,7 @@ import axios from 'axios';
 export const Comment = ({user,comments,setComments}) => {
     const deleteComment = async (id) => {
         try {
-        const request = await axios.post(`http://localhost:4000/api/comments/delete/${id}`)
+        const request = await axios.post(`https://vast-citadel-97852.herokuapp.com/api/comments/delete/${id}`)
         const newArray = comments.filter(comment => comment._id !== id)
         setComments(newArray)
         } catch(e){

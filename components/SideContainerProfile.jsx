@@ -44,7 +44,7 @@ export const SideContainerProfile = ({isLoading,userData}) => {
             }
             const request = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/api/user/update_aboutme',
+                url: 'https://vast-citadel-97852.herokuapp.com/api/user/update_aboutme',
                 data,
                 headers:{
                   "Content-Type":"application/json"
@@ -65,7 +65,7 @@ export const SideContainerProfile = ({isLoading,userData}) => {
             }
             const request = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/api/user/update_gender',
+                url: 'https://vast-citadel-97852.herokuapp.com/api/user/update_gender',
                 data,
                 headers:{
                   "Content-Type":"application/json"
@@ -85,7 +85,7 @@ export const SideContainerProfile = ({isLoading,userData}) => {
             }
             const request = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/api/user/update_location',
+                url: 'https://vast-citadel-97852.herokuapp.com/api/user/update_location',
                 data,
                 headers:{
                   "Content-Type":"application/json"
@@ -105,7 +105,7 @@ export const SideContainerProfile = ({isLoading,userData}) => {
             }
             const request = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/api/user/update_date_of_birth',
+                url: 'https://vast-citadel-97852.herokuapp.com/api/user/update_date_of_birth',
                 data,
                 headers:{
                   "Content-Type":"application/json"

@@ -31,7 +31,7 @@ export const InputPost = ({user}) => {
         try {
           const request = await axios({
             method: 'post',
-            url: 'http://localhost:4000/api/posts',
+            url: 'https://vast-citadel-97852.herokuapp.com/api/posts',
             data,
             headers:{
               "Content-Type":"application/json"

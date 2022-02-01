@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { io } from "socket.io-client";
 
 
-const hostSocket = 'http://localhost:4000'
+const hostSocket = 'https://vast-citadel-97852.herokuapp.com'
 let socket = io(hostSocket,{transports: ['websocket'],upgrade:false})
 function MyApp({ Component, pageProps }) {
  
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
   const [userChats,setArrayOfUserChats] = useState('')
   useEffect(() => {
       socket.once('connect',(socket) => {
-        console.log("User connected")
+        console.log("User connected"+ socket)
       })
       socket.on('post:create',post => {
       addPost(post)
@@ -81,11 +81,11 @@ function MyApp({ Component, pageProps }) {
   async function fetchData() {
     
       try {
-        const request = await axios.get('http://localhost:4000/api/user/current').then((response) => {
+        const request = await axios.get('https://vast-citadel-97852.herokuapp.com/api/user/current').then((response) => {
           axios.all([
-            axios.get(`http://localhost:4000/api/users/${response.data.userId}`),
-            axios.get('http://localhost:4000/api/users/'),
-            axios.get(`http://localhost:4000/api/posts/`)
+            axios.get(`https://vast-citadel-97852.herokuapp.com/api/users/${response.data.userId}`),
+            axios.get('https://vast-citadel-97852.herokuapp.com/api/users/'),
+            axios.get(`https://vast-citadel-97852.herokuapp.com/api/posts/`)
           ]).then(axios.spread((user,users,posts) => {
             console.log("requesting data")
             setCurrentUser(user.data)
