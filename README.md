@@ -9,3 +9,5 @@ Hello, in this "clone" of Facebook you can:
 - Create posts
 - Like posts
 - Dislike posts 
+
+Currently realtime interaction not working because netlify don't support websockets, but believe me it works. 
