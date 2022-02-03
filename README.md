@@ -1,7 +1,7 @@
 # SOCIAL_MEDIA_TOP     
 ## Alex Srebernic    
 
-Hello, in this "clone" of Facebook you can:
+Hello, in this "clone" of Facebook where you can:
 - Create a user 
 - Edit your profile 
 - Add friends
