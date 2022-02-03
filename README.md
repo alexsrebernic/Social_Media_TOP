@@ -11,3 +11,7 @@ Hello, in this "clone" of Facebook you can:
 - Dislike posts 
 
 Currently realtime interaction not working because netlify don't support websockets, but believe me it works. 
+
+![](social-media.gif)
+
+[LIVE SERVER](https://condescending-chandrasekhar-2a90a5.netlify.app/)
